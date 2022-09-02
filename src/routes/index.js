@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Cta from '../pages/cta'
+import OutArea from './outArea'
 
 export default function Routes() {
-    return (<Cta/>)
+    return (<OutArea/>)
 }
