@@ -18,7 +18,21 @@ const appStyles = StyleSheet.create({
     btnText1: {
         color: COLORS.green,
         fontSize: 16,
-        fontWeight: 'bold',    }
+        fontWeight: 'bold'
+    },
+    btn2:{
+        height: 52,
+        borderColor: '#fff',
+        borderWidth: 2,
+        borderRadius: 26,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    btnText2: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold'
+    }
 })
 
 export default appStyles

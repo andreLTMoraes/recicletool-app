@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Cta from '../pages/cta'
 import Choice from '../pages/choice'
+import Login from '../pages/login'
+import Register from '../pages/register'
 
 const Stack = createNativeStackNavigator()
 
@@ -13,6 +15,8 @@ export default function OutArea() {
         }}>
             <Stack.Screen name='cta' component={Cta}/>
             <Stack.Screen name='choice' component={Choice}/>
+            <Stack.Screen name='login' component={Login}/>
+            <Stack.Screen name='register' component={Register}/>
         </Stack.Navigator>
     )
 }
