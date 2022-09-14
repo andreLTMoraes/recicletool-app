@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
+import { AuthContext } from '../contexts/Authentication'
 import OutArea from './outArea'
+import Home from '../pages/home'
 
 export default function Routes() {
-    return (<OutArea/>)
+    const { user } = useContext(AuthContext)
+    return (!!user ? <Home/> : <OutArea/>)
 }

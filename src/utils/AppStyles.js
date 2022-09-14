@@ -32,7 +32,20 @@ const appStyles = StyleSheet.create({
         color: '#fff',
         fontSize: 16,
         fontWeight: 'bold'
-    }
+    },
+    btn3:{
+        width: '80%',
+        height: 52,
+        backgroundColor: COLORS.green,
+        borderRadius: 26,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    btnText3: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold'
+    },
 })
 
 export default appStyles
