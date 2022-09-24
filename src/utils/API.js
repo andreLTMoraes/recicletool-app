@@ -7,6 +7,13 @@ export function login(username, password) {
     });
 }
 
+export function register(user) {
+    return sleep({
+        username: "André Moraes",
+        email: "andre@test.com"
+    });
+}
+
 const sleep = (resData) => {
     return new Promise(resolve =>
         setTimeout(() => resolve(

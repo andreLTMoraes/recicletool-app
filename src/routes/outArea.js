@@ -5,6 +5,7 @@ import Cta from '../pages/cta'
 import Choice from '../pages/choice'
 import Login from '../pages/login'
 import Register from '../pages/register'
+import Rules from '../pages/rules'
 
 const Stack = createNativeStackNavigator()
 
@@ -17,6 +18,7 @@ export default function OutArea() {
             <Stack.Screen name='choice' component={Choice}/>
             <Stack.Screen name='login' component={Login}/>
             <Stack.Screen name='register' component={Register}/>
+            <Stack.Screen name='out-rules' component={Rules}/>
         </Stack.Navigator>
     )
 }
