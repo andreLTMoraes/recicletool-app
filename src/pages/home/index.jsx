@@ -1,6 +1,6 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
+import { StyleSheet, Text, View, Pressable, Image, FlatList } from 'react-native';
 
 export default function Home() {
   return (
@@ -23,18 +23,24 @@ export default function Home() {
         </Pressable>
       </View>
       <View style={[styles.container, styles.containerUpperLower]}>
-        <ContainerResgate resgatar={true} text1={'R$ 12,00 de desconto no'} text2={'KIT DEVASSA 350ML'}/>
+        <FlatList horizontal={true} style={{flex: 1}}
+          data={[{resgatar: true}, {resgatar: true, backgroundColor: '#EDE5CF'}, {resgatar: false, backgroundColor: '#EDE5CF'}]}
+          renderItem={({item}) => 
+            <ContainerResgate resgatar={item.resgatar} 
+            text1={'R$ 12,00 de desconto no'} text2={'KIT DEVASSA 350ML'}
+            backgroundColor={item.backgroundColor}/>}
+        />
       </View>
       <StatusBar style="auto" />
     </View>
   );
 }
 
-function ContainerResgate({ resgatar, text1, text2 }) {
+function ContainerResgate({ resgatar, text1, text2, backgroundColor }) {
   return (
-    <View style={styles.containerResgate}>
+    <View style={[styles.containerResgate, {backgroundColor: backgroundColor? backgroundColor: '#DBF0D8'}]}>
       <View style={{ flex: 4, padding: '10%', width: '100%' }}>
-        <Image source={require("../../../assets/devassaLatas.png")} style={{ flex: 4, alignSelf: 'center', width: '80%' }}  resizeMode='contain' />
+        <Image source={require("../../../assets/devassaLatas.png")} style={styles.cartaoResgateImagem}  resizeMode='contain' />
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <Text style={[styles.text, { textAlign: 'left', alignSelf: 'flex-start' }]}>
             {text1}{'\n'}
@@ -116,7 +122,8 @@ const styles = StyleSheet.create({
   containerResgate: {
     flex: 1,
     alignSelf: 'flex-start',
-    width: '75%',
+    width: 230,
+    marginRight: 20,
     backgroundColor: '#DBF0D8',
     borderRadius: 10,
     justifyContent: 'space-around',
@@ -131,5 +138,11 @@ const styles = StyleSheet.create({
     width: '100%', 
     justifyContent: 'center', 
     alignItems: 'center' 
+  },
+
+  cartaoResgateImagem: { 
+    flex: 4, 
+    alignSelf: 'center', 
+    width: '80%' 
   },
 });
