@@ -18,20 +18,22 @@ export default function InArea() {
     return (
         <Drawer.Navigator
             drawerContent={(props) => <RecDrawer {...props} />}
-            screenOptions={({navigation}) => ({
+            screenOptions={({ navigation }) => ({
                 headerLeft: () => (
-                    <Pressable onPress={() => navigation.openDrawer()} style={{padding: 20}}>
+                    <Pressable onPress={() => navigation.openDrawer()} style={{ padding: 20 }}>
                         <Image
                             source={require("../assets/hamburgerGreen.png")}
-                            style={{ width: 22, height: 14}}
+                            style={{ width: 22, height: 14 }}
                         />
                     </Pressable>
                 ),
                 headerRight: () => (
-                    <Image
-                        source={require("../assets/logo-g.png")}
-                        style={{ width: 30, height: 30, marginRight: 20}}
-                    />
+                    <Pressable onPress={() => navigation.navigate('home')} style={{ padding: 20 }}>
+                        <Image
+                            source={require("../assets/logo-g.png")}
+                            style={{ width: 30, height: 30, marginRight: 20 }}
+                        />
+                    </Pressable>
                 ),
                 title: "RECICLETOOL",
                 headerTitleAlign: 'center',
