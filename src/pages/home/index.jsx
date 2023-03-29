@@ -1,14 +1,28 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Pressable, Image, FlatList } from 'react-native';
+import CircularProgress from 'react-native-circular-progress-indicator';
 
 export default function Home() {
   return (
     <View style={[styles.container, styles.mainContainer]}>
       <View style={[styles.container, styles.containerUpperLower]}>
-        <Text style={[styles.text, { fontWeight: '700' }]}>Saldo de reciclagem</Text>
-        <View style={{ height: '80%' }}></View>
-        <Text style={[styles.text, { width: "50%" }]}>
+        <Text style={[styles.text, { fontWeight: '700'}]}>Saldo de reciclagem</Text>
+        <View style={{ flex: 1, marginVertical: 10 }}>
+          <CircularProgress
+            value={5}
+            maxValue={12}
+            radius={105}
+            valuePrefix={'R$ '}
+            valueSuffix={',00'}
+            activeStrokeWidth={20}
+            inActiveStrokeWidth={20}
+            inActiveStrokeColor={'#F2EDE4'}
+            activeStrokeColor={'#4EA674'}
+            progressValueStyle={{fontSize: 36, color: '#4EA674'}}
+          />
+        </View>
+        <Text style={[styles.text, { width: "50%"}]}>
           Falta <Text style={[styles.text, { fontWeight: '700' }]}>R$ 7,00</Text> para você <Text style={[styles.text, { color: '#4EA674' }]}>resgatar</Text> nossos kits
         </Text>
       </View>
@@ -23,12 +37,12 @@ export default function Home() {
         </Pressable>
       </View>
       <View style={[styles.container, styles.containerUpperLower]}>
-        <FlatList horizontal={true} style={{flex: 1}}
-          data={[{resgatar: true}, {resgatar: true, backgroundColor: '#EDE5CF'}, {resgatar: false, backgroundColor: '#EDE5CF'}]}
-          renderItem={({item}) => 
-            <ContainerResgate resgatar={item.resgatar} 
-            text1={'R$ 12,00 de desconto no'} text2={'KIT DEVASSA 350ML'}
-            backgroundColor={item.backgroundColor}/>}
+        <FlatList horizontal={true} style={{ flex: 1 }}
+          data={[{ resgatar: true }, { resgatar: true, backgroundColor: '#EDE5CF' }, { resgatar: false, backgroundColor: '#EDE5CF' }]}
+          renderItem={({ item }) =>
+            <ContainerResgate resgatar={item.resgatar}
+              text1={'R$ 12,00 de desconto no'} text2={'KIT DEVASSA 350ML'}
+              backgroundColor={item.backgroundColor} />}
         />
       </View>
       <StatusBar style="auto" />
@@ -38,9 +52,9 @@ export default function Home() {
 
 function ContainerResgate({ resgatar, text1, text2, backgroundColor }) {
   return (
-    <View style={[styles.containerResgate, {backgroundColor: backgroundColor? backgroundColor: '#DBF0D8'}]}>
+    <View style={[styles.containerResgate, { backgroundColor: backgroundColor ? backgroundColor : '#DBF0D8' }]}>
       <View style={{ flex: 4, padding: '10%', width: '100%' }}>
-        <Image source={require("../../../assets/devassaLatas.png")} style={styles.cartaoResgateImagem}  resizeMode='contain' />
+        <Image source={require("../../../assets/devassaLatas.png")} style={styles.cartaoResgateImagem} resizeMode='contain' />
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <Text style={[styles.text, { textAlign: 'left', alignSelf: 'flex-start' }]}>
             {text1}{'\n'}
@@ -50,7 +64,7 @@ function ContainerResgate({ resgatar, text1, text2, backgroundColor }) {
       </View>
       {resgatar ?
         <Pressable style={styles.botaoResgatar}>
-          <Text style = {[styles.text, {fontWeight: '700', color: 'white'}]}>RESGATAR</Text>
+          <Text style={[styles.text, { fontWeight: '700', color: 'white' }]}>RESGATAR</Text>
         </Pressable> : null
       }
     </View>
@@ -130,19 +144,19 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
 
-  botaoResgatar: { 
-    flex: 1, 
-    backgroundColor: '#4EA674', 
-    borderBottomRightRadius: 10, 
-    borderBottomLeftRadius: 10, 
-    width: '100%', 
-    justifyContent: 'center', 
-    alignItems: 'center' 
+  botaoResgatar: {
+    flex: 1,
+    backgroundColor: '#4EA674',
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
-  cartaoResgateImagem: { 
-    flex: 4, 
-    alignSelf: 'center', 
-    width: '80%' 
+  cartaoResgateImagem: {
+    flex: 4,
+    alignSelf: 'center',
+    width: '80%'
   },
 });
