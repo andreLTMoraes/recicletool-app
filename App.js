@@ -15,6 +15,10 @@ export default function App() {
     'OpenSans': require('./assets/fonts/OpenSans-Medium.ttf'),
   });
 
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <NavigationContainer>
       <AlertProvider>
