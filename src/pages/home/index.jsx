@@ -1,69 +1,75 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Pressable, Image, FlatList, ScrollView, Dimensions, ImageBackground } from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
+
+const screenHeight = Dimensions.get('window').height;
 
 export default function Home() {
   return (
-    <View style={[styles.container, styles.mainContainer]}>
-      <View style={[styles.container, styles.containerUpperLower]}>
-        <Text style={[styles.text, { fontWeight: '700'}]}>Saldo de reciclagem</Text>
-        <View style={{ flex: 1, marginVertical: 10 }}>
-          <CircularProgress
-            value={5}
-            maxValue={12}
-            radius={105}
-            valuePrefix={'R$ '}
-            valueSuffix={',00'}
-            activeStrokeWidth={20}
-            inActiveStrokeWidth={20}
-            inActiveStrokeColor={'#F2EDE4'}
-            activeStrokeColor={'#4EA674'}
-            progressValueStyle={{fontSize: 36, color: '#4EA674'}}
-          />
+    <View style = {styles.container}>
+      <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={[styles.container, styles.mainContainer]}>
+          <View style={[styles.container, styles.containerUpperLower]}>
+            <Text style={[styles.text, { fontWeight: '700' }]}>Saldo de reciclagem</Text>
+            <View style={{ flex: 1, marginVertical: 20 }}>
+              <CircularProgress
+                value={5}
+                maxValue={12}
+                radius={105}
+                valuePrefix={'R$ '}
+                valueSuffix={',00'}
+                activeStrokeWidth={20}
+                inActiveStrokeWidth={20}
+                inActiveStrokeColor={'#F2EDE4'}
+                activeStrokeColor={'#4EA674'}
+                progressValueStyle={{ fontSize: 36, color: '#4EA674' }}
+              />
+            </View>
+            <Text style={[styles.text, { width: "50%" }]}>
+              Falta <Text style={[styles.text, { fontWeight: '700' }]}>R$ 7,00</Text> para você <Text style={[styles.text, { color: '#4EA674' }]}>resgatar</Text> nossos kits
+            </Text>
+          </View>
+          <View style={[styles.container, styles.containerMiddle]}>
+            <Pressable style={[styles.container, styles.containerMiddleBar, {padding: 10}]}>
+              <Image source={require("../../../assets/localizationIcon.png")} style={styles.localizationIcon} />
+              <Text style={[styles.text, styles.containerMiddleFont]}>Continue reciclando</Text>
+            </Pressable>
+            <Pressable style={[styles.container, {padding: 10, borderRadius: 20}]}>
+              <Image source={require("../../../assets/historyIcon.png")} style={styles.historyIcon} />
+              <Text style={[styles.text, styles.containerMiddleFont]}>Histórico de reciclagem</Text>
+            </Pressable>
+          </View>
+          <View style={[styles.container, styles.containerUpperLower, {marginBottom: 10}]}>
+            <FlatList horizontal={true} 
+              data={[{ resgatar: true }, { resgatar: true, backgroundColor: '#EDE5CF' }, { resgatar: false, backgroundColor: '#EDE5CF' }]}
+              renderItem={({ item }) =>
+                <ContainerResgate resgatar={item.resgatar}
+                  text1={'R$ 12,00 de desconto no'} text2={'KIT DEVASSA 350ML'}
+                  backgroundColor={item.backgroundColor} />}
+            />
+          </View>
+          <StatusBar style="auto" />
         </View>
-        <Text style={[styles.text, { width: "50%"}]}>
-          Falta <Text style={[styles.text, { fontWeight: '700' }]}>R$ 7,00</Text> para você <Text style={[styles.text, { color: '#4EA674' }]}>resgatar</Text> nossos kits
-        </Text>
+      </ScrollView>
       </View>
-      <View style={[styles.container, styles.containerMiddle]}>
-        <Pressable style={[styles.container, styles.containerMiddleBar]}>
-          <Image source={require("../../../assets/localizationIcon.png")} style={styles.localizationIcon} />
-          <Text style={[styles.text, styles.containerMiddleFont]}>Continue reciclando</Text>
-        </Pressable>
-        <Pressable style={styles.container}>
-          <Image source={require("../../../assets/historyIcon.png")} style={styles.historyIcon} />
-          <Text style={[styles.text, styles.containerMiddleFont]}>Histórico de reciclagem</Text>
-        </Pressable>
-      </View>
-      <View style={[styles.container, styles.containerUpperLower]}>
-        <FlatList horizontal={true} style={{ flex: 1 }}
-          data={[{ resgatar: true }, { resgatar: true, backgroundColor: '#EDE5CF' }, { resgatar: false, backgroundColor: '#EDE5CF' }]}
-          renderItem={({ item }) =>
-            <ContainerResgate resgatar={item.resgatar}
-              text1={'R$ 12,00 de desconto no'} text2={'KIT DEVASSA 350ML'}
-              backgroundColor={item.backgroundColor} />}
-        />
-      </View>
-      <StatusBar style="auto" />
-    </View>
   );
 }
 
 function ContainerResgate({ resgatar, text1, text2, backgroundColor }) {
   return (
     <View style={[styles.containerResgate, { backgroundColor: backgroundColor ? backgroundColor : '#DBF0D8' }]}>
-      <View style={{ flex: 4, padding: '10%', width: '100%' }}>
+      <View style={{ padding: '10%', width: '100%' }}>
         <Image source={require("../../../assets/devassaLatas.png")} style={styles.cartaoResgateImagem} resizeMode='contain' />
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <Text style={[styles.text, { textAlign: 'left', alignSelf: 'flex-start' }]}>
+        <View>
+          <Text style={[styles.text, { textAlign: 'left', alignSelf: 'flex-start'}]}>
             {text1}{'\n'}
             <Text style={{ fontWeight: '700' }}>{text2}</Text>
           </Text>
         </View>
       </View>
       {resgatar ?
-        <Pressable style={styles.botaoResgatar}>
+        <Pressable style={styles.botaoResgatar} >
           <Text style={[styles.text, { fontWeight: '700', color: 'white' }]}>RESGATAR</Text>
         </Pressable> : null
       }
@@ -81,11 +87,12 @@ const styles = StyleSheet.create({
   },
 
   mainContainer: {
+    flex: 10,
     padding: '5%',
   },
 
   containerUpperLower: {
-    flex: 2.5,
+    flex: 2,
     width: "100%"
   },
 
@@ -100,14 +107,15 @@ const styles = StyleSheet.create({
   },
 
   containerMiddle: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'row',
     width: "100%",
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#EDE5CF',
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 15,
+    marginBottom: 15,
+    padding: 1,
   },
 
   containerMiddleBar: {
@@ -115,12 +123,11 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderRightWidth: 1,
     borderRightColor: '#EDE5CF',
-    height: "95%",
   },
 
   containerMiddleFont: {
     color: '#4EA674',
-    width: '60%'
+    width: '80%'
   },
 
   localizationIcon: {
@@ -134,18 +141,16 @@ const styles = StyleSheet.create({
   },
 
   containerResgate: {
-    flex: 1,
     alignSelf: 'flex-start',
-    width: 230,
+    width: 227,
     marginRight: 20,
     backgroundColor: '#DBF0D8',
     borderRadius: 10,
-    justifyContent: 'space-around',
-    alignItems: 'flex-start',
+    paddingTop: 10,
   },
 
   botaoResgatar: {
-    flex: 1,
+    height: 50,
     backgroundColor: '#4EA674',
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
@@ -155,8 +160,7 @@ const styles = StyleSheet.create({
   },
 
   cartaoResgateImagem: {
-    flex: 4,
-    alignSelf: 'center',
-    width: '80%'
+    width: 180,
+    height: 152,
   },
 });
