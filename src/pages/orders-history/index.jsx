@@ -1,21 +1,44 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import OrderCard from '../../components/OrderCard';
 
 export default function OrderHistory() {
-    return (
-      <View style={styles.container}>
-        <Text>Order History</Text>
+  return (
+    <View style={styles.mainContainer}>
+      <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
+        <Text style={styles.text}>Cupons</Text>
+        <OrderCard title="Kit Devassa" subtitle="350ml" textRigthLabel="Desconto:" textRight="R$ 12,00" />
+        <OrderCard title="Kit Devassa" subtitle="350ml" textRigthLabel="Desconto:" textRight="R$ 12,00" active={false} />
+        <OrderCard title="R$ 0,80" subtitle="10/04/2023" textRigthLabel="Código: " textRight="NPXYT5345" button={false} />
         <StatusBar style="auto" />
-      </View>
-    );
-  }
-  
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
+      </ScrollView>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    padding: '5%',
+  },
+
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  text: {
+    fontFamily: 'OpenSans',
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: 14,
+    lineHeight: 19,
+    textAlign: 'center',
+    color: '#4EA674'
+  },
+});

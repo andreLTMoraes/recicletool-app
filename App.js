@@ -13,6 +13,7 @@ import InArea from './src/routes/inArea';
 export default function App() {
   const [fontsLoaded] = useFonts({
     'OpenSans': require('./assets/fonts/OpenSans-Medium.ttf'),
+    'WorkSans': require('./assets/fonts/WorkSans-Medium.ttf'),
   });
 
   if (!fontsLoaded) {
