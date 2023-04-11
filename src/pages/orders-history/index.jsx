@@ -10,7 +10,6 @@ export default function OrderHistory() {
         <Text style={styles.text}>Cupons</Text>
         <OrderCard title="Kit Devassa" subtitle="350ml" textRigthLabel="Desconto:" textRight="R$ 12,00" />
         <OrderCard title="Kit Devassa" subtitle="350ml" textRigthLabel="Desconto:" textRight="R$ 12,00" active={false} />
-        <OrderCard title="R$ 0,80" subtitle="10/04/2023" textRigthLabel="Código: " textRight="NPXYT5345" button={false} />
         <StatusBar style="auto" />
       </ScrollView>
     </View>

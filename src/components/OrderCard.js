@@ -14,7 +14,7 @@ export default function OrderCard({ title, subtitle, textRight, textRigthLabel,
                     <Text style={styles.textRight}>    {textRight}</Text></Text>
                 {
                     button &&
-                    <Pressable style={styles.orderCardButton} onPress={onPressButton}>
+                    <Pressable style={styles.orderCardButton} onPress={active? onPressButton: () => {}}>
                         <Text style={[styles.text, { color: 'white' }]}>{buttonLabel}</Text>
                     </Pressable>
                 }
