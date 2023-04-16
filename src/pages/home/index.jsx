@@ -3,9 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Pressable, Image, FlatList, ScrollView, Dimensions, ImageBackground } from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 
-const screenHeight = Dimensions.get('window').height;
-
-export default function Home() {
+export default function Home({navigation}) {
   return (
     <View style = {styles.container}>
       <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
@@ -46,8 +44,9 @@ export default function Home() {
               renderItem={({ item }) =>
                 <ContainerResgate resgatar={item.resgatar}
                   text1={'R$ 12,00 de desconto no'} text2={'KIT DEVASSA 350ML'}
-                  backgroundColor={item.backgroundColor} />}
-            />
+                  backgroundColor={item.backgroundColor} navigation={navigation}/>}
+              >
+            </FlatList>
           </View>
           <StatusBar style="auto" />
         </View>
@@ -56,7 +55,7 @@ export default function Home() {
   );
 }
 
-function ContainerResgate({ resgatar, text1, text2, backgroundColor }) {
+function ContainerResgate({ resgatar, text1, text2, backgroundColor, navigation }) {
   return (
     <View style={[styles.containerResgate, { backgroundColor: backgroundColor ? backgroundColor : '#DBF0D8' }]}>
       <View style={{ padding: '10%', width: '100%' }}>
@@ -69,7 +68,7 @@ function ContainerResgate({ resgatar, text1, text2, backgroundColor }) {
         </View>
       </View>
       {resgatar ?
-        <Pressable style={styles.botaoResgatar} >
+        <Pressable style={styles.botaoResgatar} onPress={() => navigation.navigate('rescue')}>
           <Text style={[styles.text, { fontWeight: '700', color: 'white' }]}>RESGATAR</Text>
         </Pressable> : null
       }
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f8f8f8',
     alignItems: 'center',
     justifyContent: 'center',
   },

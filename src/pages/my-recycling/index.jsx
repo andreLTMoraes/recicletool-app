@@ -22,7 +22,7 @@ export default function MyRecycling() {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f8f8f8',
     alignItems: 'center',
     padding: '5%',
   },

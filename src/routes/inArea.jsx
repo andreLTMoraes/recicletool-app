@@ -11,6 +11,7 @@ import OrderHistory from '../pages/orders-history';
 import Rules from '../pages/rules';
 import Help from '../pages/help';
 import About from '../pages/about';
+import Rescue from '../pages/rescue';
 
 const Drawer = createDrawerNavigator();
 
@@ -19,6 +20,8 @@ export default function InArea() {
         <Drawer.Navigator
             drawerContent={(props) => <RecDrawer {...props} />}
             screenOptions={({ navigation }) => ({
+                headerStyle: {backgroundColor: '#F8F8F8'},
+                headerShadowVisible: false,
                 headerLeft: () => (
                     <Pressable onPress={() => navigation.openDrawer()} style={{ padding: 20 }}>
                         <Image
@@ -96,6 +99,22 @@ export default function InArea() {
                     drawerIcon: () => (<Feather name={'alert-circle'} size={18} color={'#fff'} />),
                     drawerLabel: 'Sobre'
                 }}
+            />
+            <Drawer.Screen name='rescue' component={Rescue}
+                options={({navigation}) => ({
+                    headerStyle: {backgroundColor: '#dbf0d8'},
+                    drawerLabel: '',
+                    headerLeft: () => (
+                        <Pressable onPress={() => navigation.goBack()} style={{ padding: 30 }}>
+                            <Image
+                                source={require("../assets/back-arrow.png")}
+                                style={{ width: 16, height: 32 }}
+                            />
+                        </Pressable>
+                    ),
+                    headerRight: () => null,
+                    title: '',
+                })}
             />
         </Drawer.Navigator>
     )
