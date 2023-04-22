@@ -12,6 +12,7 @@ import Rules from '../pages/rules';
 import Help from '../pages/help';
 import About from '../pages/about';
 import Rescue from '../pages/rescue';
+import RescueSuccess from '../pages/rescue-success';
 
 const Drawer = createDrawerNavigator();
 
@@ -101,21 +102,26 @@ export default function InArea() {
                 }}
             />
             <Drawer.Screen name='rescue' component={Rescue}
-                options={({navigation}) => ({
-                    headerStyle: {backgroundColor: '#dbf0d8'},
-                    drawerLabel: '',
-                    headerLeft: () => (
-                        <Pressable onPress={() => navigation.goBack()} style={{ padding: 30 }}>
-                            <Image
-                                source={require("../assets/back-arrow.png")}
-                                style={{ width: 16, height: 32 }}
-                            />
-                        </Pressable>
-                    ),
-                    headerRight: () => null,
-                    title: '',
-                })}
+                options={rescueScreenOptions}
+            />
+            <Drawer.Screen name='rescue-success' component={RescueSuccess}
+                options={rescueScreenOptions}
             />
         </Drawer.Navigator>
     )
 }
+
+const rescueScreenOptions = ({navigation}) => ({
+    headerStyle: {backgroundColor: '#dbf0d8'},
+    drawerLabel: '',
+    headerLeft: () => (
+        <Pressable onPress={() => navigation.goBack()} style={{ padding: 30 }}>
+            <Image
+                source={require("../assets/back-arrow.png")}
+                style={{ width: 16, height: 32 }}
+            />
+        </Pressable>
+    ),
+    headerRight: () => null,
+    title: '',
+})

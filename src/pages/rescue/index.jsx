@@ -1,6 +1,6 @@
-import { View, Image, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Image, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 
-export default function Rescue() {
+export default function Rescue({navigation}) {
     return (
         <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
             <View style={styles.mainContainer}>
@@ -15,9 +15,9 @@ export default function Rescue() {
                             <Image source={require("../../../assets/shop-icon.png")}
                                 style={styles.buttonIcon} resizeMode="contain" />
                         </View>
-                        <View style={styles.buttonChip}>
+                        <Pressable style={styles.buttonChip} onPress={() => navigation.navigate('rescue-success')}> 
                             <Text style={styles.textButton}>GERAR CUPOM</Text>
-                        </View>
+                        </Pressable>
                     </View>
                 </View>
             </View>
