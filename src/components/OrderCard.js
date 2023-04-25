@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { COLORS } from '../utils/AppStyles'
 
 export default function OrderCard({ title, subtitle, textRight, textRigthLabel,
     button = true, buttonLabel = 'RESGATAR', onPressButton, active = true }) {
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 19,
         textAlign: 'center',
-        color: '#4EA674'
+        color: COLORS.primaryDark
     },
 
     textRigthLabel: {
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     },
 
     orderCard: {
-        backgroundColor: '#DBF0D8',
+        backgroundColor: COLORS.primaryLight,
         width: '100%',
         marginTop: 20,
         flexDirection: 'row',
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     orderCardLeft: {
         borderRightWidth: 1,
         borderStyle: 'dashed',
-        borderColor: '#4EA674',
+        borderColor: COLORS.primaryDark,
         flex: 1,
         justifyContent: 'space-around',
         paddingHorizontal: 10,
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     orderCardButton: {
         height: 35,
         borderRadius: 15,
-        backgroundColor: '#4EA674',
+        backgroundColor: COLORS.primaryDark,
         width: '80%',
         justifyContent: 'center',
         alignItems: 'center'

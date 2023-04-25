@@ -16,11 +16,11 @@ export default function Input({
         <>
             <Text style={styles.label}>{label}</Text>
             <View style={[styles.inputContainer, {marginBottom: marginBottom}]}>
-                <Feather name={icon} size={24} color={COLORS.green}/>
+                <Feather name={icon} size={24} color={COLORS.primaryDark}/>
                 <TextInput
                     ref={reference}
                     style={styles.input}
-                    selectionColor={COLORS.green}
+                    selectionColor={COLORS.primaryDark}
                     {...rest}
                     blurOnSubmit={false}
                 />
@@ -31,7 +31,7 @@ export default function Input({
 
 const styles = StyleSheet.create({
     label: {
-        color: COLORS.green,
+        color: COLORS.primaryDark,
         fontWeight: 'bold',
         fontSize: 18,
         marginBottom: 8

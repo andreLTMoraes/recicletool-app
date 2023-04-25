@@ -2,6 +2,7 @@ import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import OrderCard from '../../components/OrderCard';
+import { COLORS } from '../../utils/AppStyles'
 
 export default function MyRecycling() {
   return (
@@ -40,6 +41,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 14,
     textAlign: 'center',
-    color: '#4EA674'
+    color: COLORS.primaryDark
   },
 });

@@ -1,6 +1,7 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { COLORS } from '../../utils/AppStyles'
 
 export default function Rules() {
     return (

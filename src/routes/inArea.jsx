@@ -14,6 +14,8 @@ import About from '../pages/about';
 import Rescue from '../pages/rescue';
 import RescueSuccess from '../pages/rescue-success';
 
+import { COLORS } from '../utils/AppStyles'
+
 const Drawer = createDrawerNavigator();
 
 export default function InArea() {
@@ -43,7 +45,7 @@ export default function InArea() {
                 headerTitleAlign: 'center',
                 headerTitleStyle: {
                     fontFamily: 'OpenSans',
-                    color: '#4EA674',
+                    color: COLORS.primaryDark,
                     fontSize: 14,
                     lineHeight: 30,
                     fontWeight: '800',
@@ -112,7 +114,7 @@ export default function InArea() {
 }
 
 const rescueScreenOptions = ({navigation}) => ({
-    headerStyle: {backgroundColor: '#dbf0d8'},
+    headerStyle: {backgroundColor: COLORS.primaryLight},
     drawerLabel: '',
     headerLeft: () => (
         <Pressable onPress={() => navigation.goBack()} style={{ padding: 30 }}>

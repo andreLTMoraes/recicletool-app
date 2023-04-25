@@ -1,4 +1,5 @@
 import { View, Image, Text, StyleSheet, ScrollView, Pressable } from "react-native";
+import { COLORS } from '../../utils/AppStyles'
 
 export default function Rescue({navigation}) {
     return (
@@ -28,7 +29,7 @@ export default function Rescue({navigation}) {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: '#dbf0d8',
+        backgroundColor: COLORS.primaryLight,
         alignItems: 'center'
     },
 
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     },
 
     buttonChip: {
-        backgroundColor: '#4ea674',
+        backgroundColor: COLORS.primaryDark,
         flex: 4,
         borderRadius: 30,
         justifyContent: 'center',

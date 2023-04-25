@@ -63,7 +63,7 @@ export default function Login() {
               style={styles.saveCredential}
               onPress={() => setData({...data, save: !data.save})}
             >
-              <Feather name={data.save ? 'check-square' : 'square'} size={24} color={COLORS.green}/>
+              <Feather name={data.save ? 'check-square' : 'square'} size={24} color={COLORS.primaryDark}/>
               <Text style={styles.generalLabel}>Manter conectado</Text>
             </TouchableOpacity>
             <TouchableOpacity>
@@ -114,7 +114,7 @@ export default function Login() {
       resizeMode: 'contain'
     },
     title: {
-      color: COLORS.green,
+      color: COLORS.primaryDark,
       fontSize: 40,
       fontWeight: '900',
       alignSelf: 'flex-start',
@@ -140,7 +140,7 @@ export default function Login() {
       fontSize: 16
     },
     forgotten: {
-      color: COLORS.green,
+      color: COLORS.primaryDark,
       fontSize: 16
     },
     footer: {
@@ -150,7 +150,7 @@ export default function Login() {
       marginBottom: 20
     },
     register: {
-      color: COLORS.green,
+      color: COLORS.primaryDark,
       fontWeight: '900',
       fontSize: 16
     }

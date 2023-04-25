@@ -2,6 +2,7 @@ import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import OrderCard from '../../components/OrderCard';
+import { COLORS } from '../../utils/AppStyles'
 
 export default function OrderHistory() {
   return (
@@ -37,6 +38,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 19,
     textAlign: 'center',
-    color: '#4EA674'
+    color: COLORS.primaryDark
   },
 });

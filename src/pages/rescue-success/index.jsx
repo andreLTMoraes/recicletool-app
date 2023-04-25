@@ -1,5 +1,6 @@
 import { View, Image, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import { useState } from "react";
+import { COLORS } from '../../utils/AppStyles'
 
 export default function RescueResult({ navigation }) {
 
@@ -69,7 +70,7 @@ function RescueError({ navigation }) {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: '#dbf0d8',
+        backgroundColor: COLORS.primaryLight,
         alignItems: 'center',
         justifyContent: 'space-around'
     },
@@ -108,14 +109,14 @@ const styles = StyleSheet.create({
         fontFamily: 'OpenSans',
         fontSize: 14,
         fontWeight: '700',
-        color: '#4ea674',
+        color: COLORS.primaryDark,
         letterSpacing: 1
     },
 
     button: {
         width: '60%',
         paddingVertical: 15,
-        backgroundColor: '#4ea674',
+        backgroundColor: COLORS.primaryDark,
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
