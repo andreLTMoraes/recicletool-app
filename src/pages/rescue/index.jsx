@@ -9,7 +9,7 @@ export default function Rescue({navigation}) {
                 <View style={styles.infoContainer}>
                     <View style={{ flex: 0.6, justifyContent: 'space-around' }}>
                         <Text style={styles.title}>KIT DEVASSA 350ML</Text>
-                        <Text style={styles.text}>Descrição do kit: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec felis sit lacus adipiscing eu.</Text>
+                        <Text style={[styles.text, {marginVertical: 20}]}>Descrição do kit: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec felis sit lacus adipiscing eu.</Text>
                     </View>
                     <View style={styles.button}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

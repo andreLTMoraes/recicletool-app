@@ -9,20 +9,20 @@ const colorsRecicletool =  {
     offWhite: '#F8F8F8'
 }
 
-const colorsCocaCola = { 
-    primaryDark: '#F40009',
-    primaryLight: '#F4000933',
-    secondary: '#F4000933',
-    offWhite: '#F8F8F8'
-}
-
-const colorsHeiniken = {
-    primaryDark: '#00704A',
-    primaryLight: '#F49A97',
-    secondary: '#F49A97',
-    offWhite: '#F8F8F8'
-}
-
+const colorsCocaCola = {
+    primaryDark: '#E31937',
+    primaryLight: '#FDE8E8',
+    secondary: '#F9E0B7',
+    offWhite: '#F6F6F6',
+  };
+  
+  const colorsHeineken = {
+    primaryDark: '#005D35',
+    primaryLight: 'rgba(164, 203, 78, 0.5)',
+    secondary: 'rgba(255, 47, 41, 0.5)',
+    offWhite: '#F1F1F1',
+  };
+  
 export const COLORS = colorsRecicletool;
 
 const appStyles = StyleSheet.create({
