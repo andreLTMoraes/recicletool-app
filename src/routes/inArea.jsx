@@ -28,13 +28,13 @@ export default function InArea() {
                 headerLeft: () => (
                     <Pressable onPress={() => navigation.openDrawer()} style={{ padding: 20 }}>
                         <Image
-                            source={require("../assets/hamburgerGreen.png")}
+                            source={require("../assets/hamburguer-g.png")}
                             style={{ width: 22, height: 14 }}
                         />
                     </Pressable>
                 ),
                 headerRight: () => (
-                    <Pressable onPress={() => navigation.navigate('home')} style={{ padding: 20 }}>
+                    <Pressable onPress={() => navigation.navigate('home')}>
                         <Image
                             source={require("../assets/logo-g.png")}
                             style={{ width: 30, height: 30, marginRight: 20 }}
@@ -68,10 +68,36 @@ export default function InArea() {
                 }}
             />
             <Drawer.Screen name='perfil' component={Perfil}
-                options={{
+                options={({navigation}) => ({
                     drawerIcon: () => (<Feather name={'user'} size={18} color={'#fff'} />),
-                    drawerLabel: 'Meus dados'
-                }}
+                    drawerLabel: 'Meus dados',
+                    headerTitleStyle: {
+                        fontFamily: 'OpenSans',
+                        color: 'white',
+                        fontSize: 14,
+                        lineHeight: 30,
+                        fontWeight: '800',
+                        letterSpacing: 1.5,
+                        alignSelf: 'center',
+                    },
+                    headerStyle: {backgroundColor: COLORS.primaryDark},
+                    headerLeft: () => (
+                        <Pressable onPress={() => navigation.openDrawer()} style={{ padding: 20 }}>
+                            <Image
+                                source={require("../assets/hamburguer-w.png")}
+                                style={{ width: 22, height: 14 }}
+                            />
+                        </Pressable>
+                    ),
+                    headerRight: () => (
+                        <Pressable onPress={() => navigation.navigate('home')}>
+                            <Image
+                                source={require("../assets/logo-w.png")}
+                                style={{ width: 30, height: 30, marginRight: 20 }}
+                            />
+                        </Pressable>
+                    ),
+                })}
             />
             <Drawer.Screen name='my-recycling' component={MyRecycling}
                 options={{

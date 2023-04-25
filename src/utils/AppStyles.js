@@ -23,7 +23,7 @@ const colorsCocaCola = {
     offWhite: '#F1F1F1',
   };
   
-export const COLORS = colorsRecicletool;
+export const COLORS = colorsHeineken;
 
 const appStyles = StyleSheet.create({
     btn1:{
