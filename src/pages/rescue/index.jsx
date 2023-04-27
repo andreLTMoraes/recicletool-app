@@ -1,15 +1,16 @@
 import { View, Image, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import { COLORS } from '../../utils/AppStyles'
+import appStyles from "../../utils/AppStyles";
 
 export default function Rescue({navigation}) {
     return (
         <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
-            <View style={styles.mainContainer}>
+            <View style={[appStyles.mainContainer, {backgroundColor: COLORS.primaryLight}]}>
                 <Image source={require("../../../assets/devassaLatas.png")} style={styles.image} resizeMode='contain' />
                 <View style={styles.infoContainer}>
                     <View style={{ flex: 0.6, justifyContent: 'space-around' }}>
-                        <Text style={styles.title}>KIT DEVASSA 350ML</Text>
-                        <Text style={[styles.text, {marginVertical: 20}]}>Descrição do kit: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec felis sit lacus adipiscing eu.</Text>
+                        <Text style={[appStyles.text, styles.title]}>KIT DEVASSA 350ML</Text>
+                        <Text style={[appStyles.text, {marginVertical: 20, textAlign: 'left'}]}>Descrição do kit: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec felis sit lacus adipiscing eu.</Text>
                     </View>
                     <View style={styles.button}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -17,7 +18,7 @@ export default function Rescue({navigation}) {
                                 style={styles.buttonIcon} resizeMode="contain" />
                         </View>
                         <Pressable style={styles.buttonChip} onPress={() => navigation.navigate('rescue-success')}> 
-                            <Text style={styles.textButton}>GERAR CUPOM</Text>
+                            <Text style={[appStyles.text, styles.textButton]}>GERAR CUPOM</Text>
                         </Pressable>
                     </View>
                 </View>
@@ -27,12 +28,7 @@ export default function Rescue({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    mainContainer: {
-        flex: 1,
-        backgroundColor: COLORS.primaryLight,
-        alignItems: 'center'
-    },
-
+ 
     image: {
         flex: 2,
         width: '80%'
@@ -52,15 +48,8 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontFamily: 'OpenSans',
         fontSize: 16,
         fontWeight: '700'
-    },
-
-    text: {
-        fontFamily: 'OpenSans',
-        fontSize: 14,
-        fontWeight: '400'
     },
 
     button: {
@@ -84,8 +73,6 @@ const styles = StyleSheet.create({
     },
 
     textButton: {
-        fontFamily: 'OpenSans',
-        fontSize: 14,
         fontWeight: '700',
         color: 'white',
         letterSpacing: 1

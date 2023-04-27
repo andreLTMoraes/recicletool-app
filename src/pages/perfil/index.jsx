@@ -3,27 +3,28 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { COLORS } from '../../utils/AppStyles'
 import Feather from 'react-native-vector-icons/Feather';
+import appStyles from '../../utils/AppStyles';
 
 export default function Perfil() {
   return (
     <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
-      <View style={styles.container}>
+      <View style={[appStyles.mainContainer, {backgroundColor: COLORS.primaryDark}]}>
         <Text style={styles.title}>Olá, Júlia</Text>
         <View style={styles.mainCard}>
           <ProfileField label='Nome do Usuário'>
-            <Text style={[styles.text, { color: COLORS.primaryDark }]}>Fulana de tal</Text>
+            <Text style={[appStyles.text, { color: COLORS.primaryDark }]}>Fulana de tal</Text>
           </ProfileField>
           <ProfileField label='Celular'>
-            <Text style={[styles.text, { color: COLORS.primaryDark }]}>+55******40</Text>
+            <Text style={[appStyles.text, { color: COLORS.primaryDark }]}>+55******40</Text>
           </ProfileField>
           <ProfileField label='CPF'>
-            <Text style={[styles.text, { color: COLORS.primaryDark }]}>********54</Text>
+            <Text style={[appStyles.text, { color: COLORS.primaryDark }]}>********54</Text>
           </ProfileField>
           <ProfileField label='Email'>
-            <Text style={[styles.text, { color: COLORS.primaryDark }]}>nomedaconta@gmail.com</Text>
+            <Text style={[appStyles.text, { color: COLORS.primaryDark }]}>nomedaconta@gmail.com</Text>
           </ProfileField>
           <ProfileField label='Senha'>
-            <Text style={[styles.text, { color: COLORS.primaryDark }]}>Mudar senha</Text>
+            <Text style={[appStyles.text, { color: COLORS.primaryDark }]}>Mudar senha</Text>
           </ProfileField>
           <ProfileField label='Notificações'>
             <Feather name={'toggle-left'} size={30} color={COLORS.primaryDark} />
@@ -41,7 +42,7 @@ export default function Perfil() {
 const ProfileField = ({ children, label }) => {
   return (
     <View style={styles.profileField}>
-      <Text style={styles.profileFieldText}>{label}</Text>
+      <Text style={appStyles.text}>{label}</Text>
       {children}
     </View>
   )
@@ -87,9 +88,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-  profileFieldText: {
-    fontFamily: 'OpenSans',
-    fontSize: 14,
-    color: '#161616'
-  }
 });

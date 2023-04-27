@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { COLORS } from '../utils/AppStyles'
+import appStyles from '../utils/AppStyles';
 
 export default function OrderCard({ title, subtitle, textRight, textRigthLabel,
     button = true, buttonLabel = 'RESGATAR', onPressButton, active = true }) {
@@ -7,16 +8,16 @@ export default function OrderCard({ title, subtitle, textRight, textRigthLabel,
     return (
         <View style={[styles.orderCard, { opacity: active ? 1 : 0.5 }]}>
             <View style={styles.orderCardLeft}>
-                <Text style={[styles.text, { fontSize: 16, lineHeight: 20 }]}>{title}</Text>
-                <Text style={[styles.text, { fontSize: 14, fontWeight: '400' }]}>{subtitle}</Text>
+                <Text style={[appStyles.text, styles.textTitle]}>{title}</Text>
+                <Text style={[appStyles.text, styles.textSubtitle]}>{subtitle}</Text>
             </View>
             <View style={styles.orderCardRight}>
-                <Text style={styles.textRigthLabel}>{textRigthLabel}
-                    <Text style={styles.textRight}>    {textRight}</Text></Text>
+                <Text style={[appStyles.text, {fontFamily: 'WorkSans'}]}>{textRigthLabel}
+                    <Text style={[appStyles.text, {fontFamily: 'WorkSans', fontWeight: '800', letterSpacing: 1}]}>    {textRight}</Text></Text>
                 {
                     button &&
                     <Pressable style={styles.orderCardButton} onPress={active? onPressButton: () => {}}>
-                        <Text style={[styles.text, { color: 'white' }]}>{buttonLabel}</Text>
+                        <Text style={[appStyles.text, styles.textButton]}>{buttonLabel}</Text>
                     </Pressable>
                 }
             </View>
@@ -26,34 +27,30 @@ export default function OrderCard({ title, subtitle, textRight, textRigthLabel,
 
 const styles = StyleSheet.create({
 
-    text: {
-        fontFamily: 'WorkSans',
-        fontStyle: 'normal',
-        fontWeight: '700',
-        fontSize: 14,
-        lineHeight: 19,
-        textAlign: 'center',
-        color: COLORS.primaryDark
+    textTitle: { 
+        fontFamily: 'WorkSans', 
+        fontSize: 16, 
+        lineHeight: 20, 
+        color: COLORS.primaryDark 
     },
 
-    textRigthLabel: {
-        color: 'black',
-        fontWeight: '400',
-        fontFamily: 'OpenSans', 
-        fontSize: 14,
-        lineHeight: 19,
+    textSubtitle: { 
+        fontFamily: 'WorkSans', 
+        fontSize: 14, 
+        fontWeight: '400', 
+        color: COLORS.primaryDark 
     },
 
-    textRight: {
-        color: 'black',
-        fontWeight: '800',
-        fontFamily: 'OpenSans',
-        letterSpacing: 1,
+    textButton: { 
+        fontFamily: 'WorkSans', 
+        color: 'white', 
+        fontWeight: '700' 
     },
 
     orderCard: {
         backgroundColor: COLORS.primaryLight,
-        width: '100%',
+        alignSelf: 'center',
+        width: '90%',
         marginTop: 20,
         flexDirection: 'row',
         alignItems: 'center',
