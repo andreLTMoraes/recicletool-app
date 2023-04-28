@@ -135,12 +135,8 @@ const rescueScreenOptions = ({navigation}) => ({
     headerStyle: {backgroundColor: COLORS.primaryLight},
     drawerLabel: '',
     headerLeft: () => (
-        <Pressable onPress={() => navigation.goBack()} style={{ padding: 30 }}>
-            <Image
-                source={require("../assets/back-arrow.png")}
-                style={{ width: 16, height: 32 }}
-            />
-        </Pressable>
+            <Feather onPress={() => navigation.goBack()} style={{ paddingHorizontal: 30 }}
+                name={'chevron-left'} color={COLORS.primaryDark} size={32} />
     ),
     headerRight: () => null,
     title: '',
