@@ -4,6 +4,8 @@ import { StyleSheet, Text, View, Pressable, Image, FlatList, ScrollView, Dimensi
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { COLORS } from '../../utils/AppStyles'
 import appStyles from '../../utils/AppStyles';
+import Ionicons from '@expo/vector-icons/Ionicons'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 
 export default function Home({navigation}) {
   return (
@@ -32,11 +34,11 @@ export default function Home({navigation}) {
           </View>
           <View style={[appStyles.container, styles.containerMiddle]}>
             <Pressable style={[appStyles.container, styles.containerMiddleBar, {padding: 10}]}>
-              <Image source={require("../../../assets/localizationIcon.png")} style={styles.localizationIcon} />
+              <Ionicons name='location-outline' size={22} color={COLORS.primaryDark}/>
               <Text style={[appStyles.text, styles.containerMiddleFont]}>Continue reciclando</Text>
             </Pressable>
             <Pressable style={[appStyles.container, {padding: 10, borderRadius: 20}]}>
-              <Image source={require("../../../assets/historyIcon.png")} style={styles.historyIcon} />
+              <MaterialIcons name='history' size={22} color={COLORS.primaryDark}/>
               <Text style={[appStyles.text, styles.containerMiddleFont]}>Histórico de reciclagem</Text>
             </Pressable>
           </View>

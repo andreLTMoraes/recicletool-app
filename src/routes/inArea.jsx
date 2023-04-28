@@ -23,15 +23,11 @@ export default function InArea() {
         <Drawer.Navigator
             drawerContent={(props) => <RecDrawer {...props} />}
             screenOptions={({ navigation }) => ({
-                headerStyle: {backgroundColor: '#F8F8F8'},
+                headerStyle: {backgroundColor: COLORS.background},
                 headerShadowVisible: false,
                 headerLeft: () => (
-                    <Pressable onPress={() => navigation.openDrawer()} style={{ padding: 20 }}>
-                        <Image
-                            source={require("../assets/hamburguer-g.png")}
-                            style={{ width: 22, height: 14 }}
-                        />
-                    </Pressable>
+                        <Feather name={'menu'} onPress={() => navigation.openDrawer()} size={22}
+                            style={{ paddingHorizontal: 20, color: COLORS.primaryDark }}/>
                 ),
                 headerRight: () => (
                     <Pressable onPress={() => navigation.navigate('home')}>
@@ -82,12 +78,8 @@ export default function InArea() {
                     },
                     headerStyle: {backgroundColor: COLORS.primaryDark},
                     headerLeft: () => (
-                        <Pressable onPress={() => navigation.openDrawer()} style={{ padding: 20 }}>
-                            <Image
-                                source={require("../assets/hamburguer-w.png")}
-                                style={{ width: 22, height: 14 }}
-                            />
-                        </Pressable>
+                        <Feather name={'menu'} onPress={() => navigation.openDrawer()} size={22}
+                            style={{ paddingHorizontal: 20, color: COLORS.background }}/>
                     ),
                     headerRight: () => (
                         <Pressable onPress={() => navigation.navigate('home')}>
