@@ -64,32 +64,17 @@ export default function InArea() {
                 }}
             />
             <Drawer.Screen name='perfil' component={Perfil}
-                options={({navigation}) => ({
-                    drawerIcon: () => (<Feather name={'user'} size={18} color={'#fff'} />),
-                    drawerLabel: 'Meus dados',
-                    headerTitleStyle: {
-                        fontFamily: 'OpenSans',
-                        color: 'white',
-                        fontSize: 14,
-                        lineHeight: 30,
-                        fontWeight: '800',
-                        letterSpacing: 1.5,
-                        alignSelf: 'center',
-                    },
-                    headerStyle: {backgroundColor: COLORS.primaryDark},
-                    headerLeft: () => (
-                        <Feather name={'menu'} onPress={() => navigation.openDrawer()} size={22}
-                            style={{ paddingHorizontal: 20, color: COLORS.background }}/>
-                    ),
-                    headerRight: () => (
-                        <Pressable onPress={() => navigation.navigate('home')}>
-                            <Image
-                                source={require("../assets/logo-w.png")}
-                                style={{ width: 30, height: 30, marginRight: 20 }}
-                            />
-                        </Pressable>
-                    ),
-                })}
+                options={({navigation}) => {
+                    let props = {
+                        navigation: navigation,
+                        drawerIconName: 'user',
+                        drawerLabel: 'Meu Perfil',
+                        headerTextColor: 'white',
+                        headerBackgroundColor: COLORS.primaryDark,
+                        iconColor: 'white'
+                    }
+                    return headerOptions(props);
+                }}
             />
             <Drawer.Screen name='my-recycling' component={MyRecycling}
                 options={{
@@ -106,7 +91,8 @@ export default function InArea() {
             <Drawer.Screen name='in-rules' component={Rules}
                 options={{
                     drawerIcon: () => (<Feather name={'edit'} size={18} color={'#fff'} />),
-                    drawerLabel: 'Regras'
+                    drawerLabel: 'Regras',
+                    headerStyle: {backgroundColor: COLORS.primaryLight},
                 }}
             />
             <Drawer.Screen name='help' component={Help}
@@ -116,9 +102,16 @@ export default function InArea() {
                 }}
             />
             <Drawer.Screen name='about' component={About}
-                options={{
-                    drawerIcon: () => (<Feather name={'alert-circle'} size={18} color={'#fff'} />),
-                    drawerLabel: 'Sobre'
+                options={({navigation}) => {
+                    let props = {
+                        navigation: navigation,
+                        drawerIconName: 'alert-circle',
+                        drawerLabel: 'Sobre',
+                        headerTextColor: 'white',
+                        headerBackgroundColor: COLORS.primaryDark,
+                        iconColor: 'white'
+                    }
+                    return headerOptions(props);
                 }}
             />
             <Drawer.Screen name='rescue' component={Rescue}
@@ -130,6 +123,33 @@ export default function InArea() {
         </Drawer.Navigator>
     )
 }
+
+const headerOptions = ({navigation, drawerIconName, drawerLabel, headerTextColor, headerBackgroundColor, iconColor}) => ({
+    drawerIcon: () => (<Feather name={drawerIconName} size={18} color={'#fff'} />),
+    drawerLabel: drawerLabel,
+    headerTitleStyle: {
+        fontFamily: 'OpenSans',
+        color: headerTextColor,
+        fontSize: 14,
+        lineHeight: 30,
+        fontWeight: '800',
+        letterSpacing: 1.5,
+        alignSelf: 'center',
+    },
+    headerStyle: {backgroundColor: headerBackgroundColor},
+    headerLeft: () => (
+        <Feather name={'menu'} onPress={() => navigation.openDrawer()} size={22}
+            style={{ paddingHorizontal: 20, color: headerTextColor }}/>
+    ),
+    headerRight: () => (
+        <Pressable onPress={() => navigation.navigate('home')}>
+            <Image
+                source={iconColor == 'white'? require("../assets/logo-w.png"): require("../assets/logo-g.png")}
+                style={{ width: 30, height: 30, marginRight: 20 }}
+            />
+        </Pressable>
+    ),
+})
 
 const rescueScreenOptions = ({navigation}) => ({
     headerStyle: {backgroundColor: COLORS.primaryLight},
