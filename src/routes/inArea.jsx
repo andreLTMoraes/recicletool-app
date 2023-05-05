@@ -13,6 +13,7 @@ import Help from '../pages/help';
 import About from '../pages/about';
 import Rescue from '../pages/rescue';
 import RescueSuccess from '../pages/rescue-success';
+import DeleteAccount from '../pages/delete-account';
 
 import { COLORS } from '../utils/AppStyles'
 
@@ -120,6 +121,9 @@ export default function InArea() {
             <Drawer.Screen name='rescue-success' component={RescueSuccess}
                 options={rescueScreenOptions}
             />
+            <Drawer.Screen name='delete-account' component={DeleteAccount} 
+                options={{drawerItemStyle: { height: 0 }}}
+            />
         </Drawer.Navigator>
     )
 }
@@ -153,11 +157,10 @@ const headerOptions = ({navigation, drawerIconName, drawerLabel, headerTextColor
 
 const rescueScreenOptions = ({navigation}) => ({
     headerStyle: {backgroundColor: COLORS.primaryLight},
-    drawerLabel: '',
     headerLeft: () => (
             <Feather onPress={() => navigation.goBack()} style={{ paddingHorizontal: 30 }}
                 name={'chevron-left'} color={COLORS.primaryDark} size={32} />
     ),
     headerRight: () => null,
-    title: '',
+    drawerItemStyle: { height: 0 }
 })

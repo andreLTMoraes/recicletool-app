@@ -5,7 +5,7 @@ import { COLORS } from '../../utils/AppStyles'
 import Feather from 'react-native-vector-icons/Feather';
 import appStyles from '../../utils/AppStyles';
 
-export default function Perfil() {
+export default function Perfil({navigation}) {
   return (
     <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
       <View style={[appStyles.mainContainer, {backgroundColor: COLORS.primaryDark}]}>
@@ -30,7 +30,7 @@ export default function Perfil() {
             <Feather name={'toggle-left'} size={30} color={COLORS.primaryDark} />
           </ProfileField>
           <ProfileField label='Deletar conta'>
-            <Feather name={'chevron-right'} size={30} color={COLORS.primaryDark} />
+            <Feather name={'chevron-right'} size={30} color={COLORS.primaryDark} onPress={() => navigation.navigate('delete-account')}/>
           </ProfileField>
         </View>
         <StatusBar style="auto" />
