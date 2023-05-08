@@ -22,10 +22,10 @@ export default function DeleteAccount({navigation}) {
                         )
                     }
                 </View>
-                <Pressable style = {styles.button} onPress={() => navigation.navigate('perfil')}>
+                <Pressable style = {styles.button} onPress={() => navigation.navigate('perfil')} android_ripple={{ color: '#D3D3D3' }}>
                     <Text style = {styles.buttonText}>CANCELAR</Text>
                 </Pressable>
-                <Pressable style = {styles.button} onPress={() => navigation.navigate('home')}>
+                <Pressable style = {styles.button} onPress={() => navigation.navigate('home')} android_ripple={{ color: '#D3D3D3' }}>
                     <Text style = {styles.buttonText}>DELETAR CONTA</Text>
                 </Pressable>
             </View>
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.primaryDark,
         borderRadius: 50,
+        overflow: 'hidden'
     },
 
     buttonText: {

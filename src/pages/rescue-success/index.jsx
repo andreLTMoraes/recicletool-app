@@ -29,10 +29,10 @@ function RescueSuccess({ navigation }) {
                         <Text style={[appStyles.text, styles.text]}>Seu cupom foi para seu histórico. O próximo passo é ir a um dos nosso supermercados parceiros e retirar seu kit com um de nossos atendente.</Text>
                     </View>
                     <View style={{ alignItems: 'center' }}>
-                        <Pressable onPress={() => navigation.navigate('order-history')}>
+                        <Pressable onPress={() => navigation.navigate('order-history')} android_ripple={{ color: COLORS.primaryDark }} style={{padding: 10}}>
                             <Text style={[appStyles.text, styles.textButton]}>HISTÓRICO DE CUPONS</Text>
                         </Pressable>
-                        <Pressable style={{ marginTop: 20 }} onPress={() => navigation.navigate('home')}>
+                        <Pressable style={{ marginTop: 10, padding: 10 }} onPress={() => navigation.navigate('home')} android_ripple={{ color: COLORS.primaryDark }}>
                             <Text style={[appStyles.text, styles.textButton]}>VOLTAR</Text>
                         </Pressable>
                     </View>

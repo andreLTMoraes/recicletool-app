@@ -7,13 +7,13 @@ import appStyles from '../../utils/AppStyles';
 import Ionicons from '@expo/vector-icons/Ionicons'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
   return (
-    <View style = {appStyles.container}>
+    <View style={appStyles.container}>
       <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
         <View style={appStyles.mainContainer}>
           <View style={[appStyles.container, styles.containerUpperLower]}>
-            <Text style={[appStyles.title, {color: 'black'}]}>Saldo de reciclagem</Text>
+            <Text style={[appStyles.title, { color: 'black' }]}>Saldo de reciclagem</Text>
             <View style={{ flex: 1, marginVertical: 20 }}>
               <CircularProgress
                 value={5}
@@ -33,29 +33,35 @@ export default function Home({navigation}) {
             </Text>
           </View>
           <View style={[appStyles.container, styles.containerMiddle]}>
-            <Pressable style={[appStyles.container, styles.containerMiddleBar, {padding: 10}]}>
-              <Ionicons name='location-outline' size={22} color={COLORS.primaryDark}/>
-              <Text style={[appStyles.text, styles.containerMiddleFont]}>Continue reciclando</Text>
+            <Pressable style={appStyles.container} android_ripple={{ color: COLORS.primaryLight }}>
+              <View style={[appStyles.container, styles.containerMiddleBar]} >
+                <Ionicons name='location-outline' size={22} color={COLORS.primaryDark} />
+                <Text style={[appStyles.text, styles.containerMiddleFont]}>Continue{"\n"}reciclando</Text>
+              </View>
             </Pressable>
-            <Pressable style={[appStyles.container, {padding: 10, borderRadius: 20}]}>
-              <MaterialIcons name='history' size={22} color={COLORS.primaryDark}/>
-              <Text style={[appStyles.text, styles.containerMiddleFont]}>Histórico de reciclagem</Text>
+            <Pressable style={appStyles.container} android_ripple={{ color: COLORS.primaryLight }}
+              onPress={() => navigation.navigate('my-recycling')}
+            >
+              <View style={[appStyles.container, styles.containerMiddleBar, { borderRightWidth: 0 }]}>
+                <MaterialIcons name='history' size={22} color={COLORS.primaryDark} />
+                <Text style={[appStyles.text, styles.containerMiddleFont]}>Histórico de{"\n"}reciclagem</Text>
+              </View>
             </Pressable>
           </View>
-          <View style={[appStyles.container, styles.containerUpperLower, {marginBottom: 10}]}>
-            <FlatList horizontal={true} 
+          <View style={[appStyles.container, styles.containerUpperLower, { marginBottom: 10 }]}>
+            <FlatList horizontal={true}
               data={[{ resgatar: true }, { resgatar: true, backgroundColor: COLORS.secondary }, { resgatar: false, backgroundColor: COLORS.secondary }]}
               renderItem={({ item }) =>
                 <ContainerResgate resgatar={item.resgatar}
                   text1={'R$ 12,00 de desconto no'} text2={'KIT DEVASSA 350ML'}
-                  backgroundColor={item.backgroundColor} navigation={navigation}/>}
-              >
+                  backgroundColor={item.backgroundColor} navigation={navigation} />}
+            >
             </FlatList>
           </View>
           <StatusBar style="auto" />
         </View>
       </ScrollView>
-      </View>
+    </View>
   );
 }
 
@@ -65,14 +71,14 @@ function ContainerResgate({ resgatar, text1, text2, backgroundColor, navigation 
       <View style={{ padding: '10%', width: '100%' }}>
         <Image source={require("../../../assets/devassaLatas.png")} style={styles.cartaoResgateImagem} resizeMode='contain' />
         <View>
-          <Text style={[appStyles.text, { textAlign: 'left', alignSelf: 'flex-start'}]}>
+          <Text style={[appStyles.text, { textAlign: 'left', alignSelf: 'flex-start' }]}>
             {text1}{'\n'}
             <Text style={{ fontWeight: '700' }}>{text2}</Text>
           </Text>
         </View>
       </View>
       {resgatar ?
-        <Pressable style={styles.botaoResgatar} onPress={() => navigation.navigate('rescue')}>
+        <Pressable style={styles.botaoResgatar} onPress={() => navigation.navigate('rescue')} android_ripple={{ color: COLORS.primaryLight }}>
           <Text style={[appStyles.text, { fontWeight: '700', color: 'white' }]}>RESGATAR</Text>
         </Pressable> : null
       }
@@ -96,7 +102,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.primaryLight,
     marginTop: 15,
     marginBottom: 15,
-    padding: 1,
+    //padding: 1,
   },
 
   containerMiddleBar: {
@@ -104,6 +110,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderRightWidth: 1,
     borderRightColor: COLORS.primaryLight,
+    margin: 7,
   },
 
   containerMiddleFont: {

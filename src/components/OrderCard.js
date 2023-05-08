@@ -16,7 +16,7 @@ export default function OrderCard({ title, subtitle, textRight, textRigthLabel,
                     <Text style={[appStyles.text, {fontFamily: 'WorkSans', fontWeight: '800', letterSpacing: 1}]}>    {textRight}</Text></Text>
                 {
                     button &&
-                    <Pressable style={styles.orderCardButton} onPress={active? onPressButton: () => {}}>
+                    <Pressable style={styles.orderCardButton} onPress={active? onPressButton: () => {}} android_ripple={{color: COLORS.primaryLight}}>
                         <Text style={[appStyles.text, styles.textButton]}>{buttonLabel}</Text>
                     </Pressable>
                 }
