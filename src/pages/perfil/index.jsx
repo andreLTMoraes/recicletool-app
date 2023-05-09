@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, Pressable } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Pressable, Switch } from 'react-native';
 import { COLORS } from '../../utils/AppStyles'
 import Feather from 'react-native-vector-icons/Feather';
 import appStyles from '../../utils/AppStyles';
@@ -27,10 +27,10 @@ export default function Perfil({ navigation }) {
             <Text style={[appStyles.text, { color: COLORS.primaryDark }]}>Mudar senha</Text>
           </ProfileField>
           <ProfileField label='Notificações'>
-            <Feather name={'toggle-left'} size={30} color={COLORS.primaryDark} />
+            <ToggleNotifications/>
           </ProfileField>
           <ProfileField label='Deletar conta'>
-            <View style={{ overflow: 'hidden', borderRadius: 100 }}>
+            <View style={{ overflow: 'hidden', borderRadius: 100, marginVertical: -10 }}>
               <Pressable 
                 onPress={() => navigation.navigate('delete-account')} 
                 android_ripple={{ color: COLORS.primaryDark }}
@@ -54,6 +54,23 @@ const ProfileField = ({ children, label }) => {
       {children}
     </View>
   )
+}
+
+const ToggleNotifications = () => {
+  
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  
+  return (
+    <Switch
+        trackColor={{false: '#767577', true: COLORS.primaryDark}}
+        thumbColor={isEnabled ? COLORS.primaryLight : '#f4f3f4'}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+        style = {{marginVertical: -10}}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
