@@ -14,50 +14,11 @@ import About from '../pages/about';
 import Rescue from '../pages/rescue';
 import RescueSuccess from '../pages/rescue-success';
 import DeleteAccount from '../pages/delete-account';
+import Locations from "../pages/locations"
 
 import { COLORS } from '../utils/AppStyles'
 
 const Drawer = createDrawerNavigator();
-
-const HomeIcon = ({onPress}) => (
-    <View style={{ marginRight: 15, borderRadius: 50, overflow: 'hidden' }}>
-        <Pressable
-            onPress={onPress}
-            style={{ padding: 5 }}
-            android_ripple={{ color: '#D3D3D3' }}
-        >
-            <Image
-                source={require("../assets/logo-g.png")}
-                style={{ width: 28, height: 28 }}
-            />
-        </Pressable>
-    </View>
-)
-
-const HamburgerIcon = ({onPress, color, rippleColor}) => (
-    <View style={{ marginLeft: 20, borderRadius: 50, overflow: 'hidden' }}>
-        <Pressable
-            onPress={onPress}
-            style={{ padding: 10 }}
-            android_ripple={{ color: rippleColor }}
-        >
-            <Feather name={'menu'} size={22}
-            style={{ color: color }} />
-        </Pressable>
-    </View>
-);
-
-const BackIcon = ({onPress, rippleColor, color}) => (
-    <View style={{ marginLeft: 20, borderRadius: 50, overflow: 'hidden' }}>
-        <Pressable
-            onPress={onPress}
-            style={{ padding: 5 }}
-            android_ripple={{ color: rippleColor }}
-        >
-            <Feather name={'chevron-left'} color={color} size={27} />
-        </Pressable>
-    </View>
-);
 
 export default function InArea() {
     return (
@@ -113,6 +74,13 @@ export default function InArea() {
                         iconColor: 'white'
                     }
                     return altHeaderOptions(props);
+                }}
+            />
+            <Drawer.Screen name='locations' component={Locations}
+                options={{
+                    drawerIcon: () => (<Feather name={'map-pin'} size={18} color={'#fff'} />),
+                    drawerLabel: 'Pontos de coleta',
+                    headerStyle: { backgroundColor: COLORS.background },
                 }}
             />
             <Drawer.Screen name='my-recycling' component={MyRecycling}
@@ -203,3 +171,44 @@ const rescueScreenOptions = ({ navigation }) => ({
     headerRight: () => null,
     drawerItemStyle: { height: 0 }
 })
+
+
+const HomeIcon = ({onPress}) => (
+    <View style={{ marginRight: 15, borderRadius: 50, overflow: 'hidden' }}>
+        <Pressable
+            onPress={onPress}
+            style={{ padding: 5 }}
+            android_ripple={{ color: '#D3D3D3' }}
+        >
+            <Image
+                source={require("../assets/logo-g.png")}
+                style={{ width: 28, height: 28 }}
+            />
+        </Pressable>
+    </View>
+)
+
+const HamburgerIcon = ({onPress, color, rippleColor}) => (
+    <View style={{ marginLeft: 20, borderRadius: 50, overflow: 'hidden' }}>
+        <Pressable
+            onPress={onPress}
+            style={{ padding: 10 }}
+            android_ripple={{ color: rippleColor }}
+        >
+            <Feather name={'menu'} size={22}
+            style={{ color: color }} />
+        </Pressable>
+    </View>
+);
+
+const BackIcon = ({onPress, rippleColor, color}) => (
+    <View style={{ marginLeft: 20, borderRadius: 50, overflow: 'hidden' }}>
+        <Pressable
+            onPress={onPress}
+            style={{ padding: 5 }}
+            android_ripple={{ color: rippleColor }}
+        >
+            <Feather name={'chevron-left'} color={color} size={27} />
+        </Pressable>
+    </View>
+);
