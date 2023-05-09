@@ -8,7 +8,7 @@ import appStyles from '../../utils/AppStyles';
 export default function MyRecycling() {
     
   return (
-    <View style={appStyles.mainContainer}>
+    <View style={[appStyles.mainContainer, {paddingBottom: '5%'}]}>
       <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
         <Text style={appStyles.title}>Minhas Reciclagens</Text>
         <Text style={[appStyles.text, styles.saldoLabel]}>

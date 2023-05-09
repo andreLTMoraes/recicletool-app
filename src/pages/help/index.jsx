@@ -1,6 +1,6 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable, LayoutAnimation, UIManager } from 'react-native';
+import { StyleSheet, Text, View, Pressable, LayoutAnimation, UIManager, ScrollView } from 'react-native';
 import appStyles from '../../utils/AppStyles';
 import { useState } from 'react';
 import Feather from '@expo/vector-icons/Feather'
@@ -18,38 +18,40 @@ export default function Help() {
   };
 
   return (
-    <View style={appStyles.mainContainer}>
-      <Text style={[appStyles.title, styles.mainTitle]}>Central de ajuda</Text>
-      <View style={styles.qaContainer}>
-        {
-          qa.map((pair, idx) =>
-            <Pressable style={{ paddingTop: 15 }} key={idx}
-              onPress={() => toggleAccordion(idx)}>
-              <View style={styles.questionContainer}>
-                <Feather name={questionOpenedIndex == idx? 'chevron-up': 'chevron-down'} size={20} color={COLORS.primaryDark} />
-                <Text
-                  style={[appStyles.text,
-                  {
-                    textAlign: 'left',
-                    fontWeight: questionOpenedIndex == idx ? '700' : '400',
-                    color: questionOpenedIndex != idx && questionOpenedIndex != -1 ? '#A2A2A2' : 'black'
-                  }
-                  ]}>
-                  {pair.question}
-                </Text>
-              </View>
-              {
-                questionOpenedIndex == idx ?
-                  <View style={styles.answerContainer}>
-                    <Text style={[appStyles.text, { textAlign: 'left' }]}>{pair.answer}</Text>
-                  </View> : null
-              }
-            </Pressable>
-          )
-        }
+    <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={appStyles.mainContainer}>
+        <Text style={[appStyles.title, styles.mainTitle]}>Central de ajuda</Text>
+        <View style={styles.qaContainer}>
+          {
+            qa.map((pair, idx) =>
+              <Pressable style={{ paddingTop: 15 }} key={idx}
+                onPress={() => toggleAccordion(idx)}>
+                <View style={styles.questionContainer}>
+                  <Feather name={questionOpenedIndex == idx ? 'chevron-up' : 'chevron-down'} size={20} color={COLORS.primaryDark} />
+                  <Text
+                    style={[appStyles.text,
+                    {
+                      textAlign: 'left',
+                      fontWeight: questionOpenedIndex == idx ? '700' : '400',
+                      color: questionOpenedIndex != idx && questionOpenedIndex != -1 ? '#A2A2A2' : 'black'
+                    }
+                    ]}>
+                    {pair.question}
+                  </Text>
+                </View>
+                {
+                  questionOpenedIndex == idx ?
+                    <View style={styles.answerContainer}>
+                      <Text style={[appStyles.text, { textAlign: 'left' }]}>{pair.answer}</Text>
+                    </View> : null
+                }
+              </Pressable>
+            )
+          }
+        </View>
+        <StatusBar style="auto" />
       </View>
-      <StatusBar style="auto" />
-    </View>
+    </ScrollView>
   );
 }
 
@@ -77,20 +79,20 @@ const styles = StyleSheet.create({
     width: '85%',
   },
 
-  qaContainer: { 
-    alignContent: 'flex-start', 
-    width: '90%', 
-    marginTop: 40 
+  qaContainer: {
+    alignContent: 'flex-start',
+    width: '90%',
+    marginTop: 40
   },
 
-  questionContainer: { 
-    flexDirection: 'row', 
-    alignContent: 'flex-start' 
+  questionContainer: {
+    flexDirection: 'row',
+    alignContent: 'flex-start'
   },
 
-  answerContainer: { 
-    marginVertical: 10, 
-    alignContent: 'flex-start', 
-    marginLeft: 20 
+  answerContainer: {
+    marginVertical: 10,
+    alignContent: 'flex-start',
+    marginLeft: 20
   }
 });
