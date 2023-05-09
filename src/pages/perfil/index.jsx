@@ -1,14 +1,14 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Pressable } from 'react-native';
 import { COLORS } from '../../utils/AppStyles'
 import Feather from 'react-native-vector-icons/Feather';
 import appStyles from '../../utils/AppStyles';
 
-export default function Perfil({navigation}) {
+export default function Perfil({ navigation }) {
   return (
     <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
-      <View style={[appStyles.mainContainer, {backgroundColor: COLORS.primaryDark}]}>
+      <View style={[appStyles.mainContainer, { backgroundColor: COLORS.primaryDark }]}>
         <Text style={styles.title}>Olá, Júlia</Text>
         <View style={styles.mainCard}>
           <ProfileField label='Nome do Usuário'>
@@ -30,7 +30,15 @@ export default function Perfil({navigation}) {
             <Feather name={'toggle-left'} size={30} color={COLORS.primaryDark} />
           </ProfileField>
           <ProfileField label='Deletar conta'>
-            <Feather name={'chevron-right'} size={30} color={COLORS.primaryDark} onPress={() => navigation.navigate('delete-account')}/>
+            <View style={{ overflow: 'hidden', borderRadius: 100 }}>
+              <Pressable 
+                onPress={() => navigation.navigate('delete-account')} 
+                android_ripple={{ color: COLORS.primaryDark }}
+                style = {{padding: 5}}
+              >
+                <Feather name={'chevron-right'} size={30} color={COLORS.primaryDark} />
+              </Pressable>
+            </View>
           </ProfileField>
         </View>
         <StatusBar style="auto" />
