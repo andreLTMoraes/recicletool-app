@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, Linking, ScrollView } from "react-native";
 import appStyles from "../../utils/AppStyles";
 import { COLORS } from "../../utils/AppStyles";
 
@@ -7,28 +7,36 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 export default function Locations() {
     return (
-        <View style={appStyles.mainContainer}>
-            <Text style={appStyles.title}>Pontos de coleta</Text>
-            <CardColeta 
-                addressLabel="Supermecado Hiperbom" 
-                adress="Avenida Doutor José Rufino, 122, Areias, Recife-PE" 
-            />
-        </View>
+        <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
+            <View style={appStyles.mainContainer}>
+                <Text style={appStyles.title}>Pontos de coleta</Text>
+                <CardColeta
+                    addressTitle="Supermecado Hiperbom"
+                    adressLabel="Rua Benfica, 455 - Madalena, Recife - PE"
+                    addressMaps="Escola Politécnica de Pernambuco - Rua Benfica - Madalena, Recife - PE"
+                    addressWaze="Escola Politécnica de Pernambuco, R. Benfica, 455 - Madalena, Recife - PE, 50720-001, Brasil"
+                />
+            </View>
+        </ScrollView>
     );
 }
 
-const CardColeta = ({ addressLabel, adress }) => {
+const CardColeta = ({ addressTitle, adressLabel, addressMaps, addressWaze }) => {
     return (
         <View style={styles.cardColeta}>
             <View style={styles.cardColetaTextArea}>
-                <Text style={[appStyles.title, { color: 'white', fontSize: 16 }]}>{addressLabel}</Text>
-                <Text style={[appStyles.text, { color: 'white', textAlign: 'left' }]}>{adress}</Text>
+                <Text style={[appStyles.title, { color: 'white', fontSize: 16 }]}>{addressTitle}</Text>
+                <Text style={[appStyles.text, { color: 'white', textAlign: 'left' }]}>{adressLabel}</Text>
             </View>
             <View style={styles.cardColetaIconsArea}>
-                <IconContainer label="Maps">
+                <IconContainer label="Maps"
+                    onPress={() => Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressMaps)}`)}
+                >
                     <MaterialCommunityIcons name={'google-maps'} color={COLORS.primaryDark} size={30} />
                 </IconContainer>
-                <IconContainer label="Waze">
+                <IconContainer label="Waze"
+                    onPress={() => Linking.openURL(`https://www.waze.com/ul?q=${encodeURIComponent(addressWaze)}&navigate=yes`)}
+                >
                     <FontAwesome5 name={'waze'} color={COLORS.primaryDark} size={30} />
                 </IconContainer>
                 <IconContainer label="Uber">
@@ -43,16 +51,16 @@ const CardColeta = ({ addressLabel, adress }) => {
 const IconContainer = ({ children, label, onPress }) => {
     return (
         <View style={{ borderRadius: 10, overflow: 'hidden' }}>
-            <Pressable 
-                android_ripple={{ color: COLORS.primaryDark }} 
+            <Pressable
+                android_ripple={{ color: COLORS.primaryDark }}
                 style={{ padding: 5, alignItems: 'center' }}
                 onPress={onPress}
             >
                 {children}
                 {
-                    label !== undefined?
-                        <Text style = {[appStyles.text, {fontSize: 10, color: COLORS.primaryDark}]}>{label}</Text>
-                        : null 
+                    label !== undefined ?
+                        <Text style={[appStyles.text, { fontSize: 10, color: COLORS.primaryDark }]}>{label}</Text>
+                        : null
                 }
             </Pressable>
         </View>
@@ -62,7 +70,7 @@ const IconContainer = ({ children, label, onPress }) => {
 const styles = StyleSheet.create({
     cardColeta: {
         width: "80%",
-        minHeight: 200,
+        minHeight: 180,
         backgroundColor: COLORS.primaryDark,
         borderRadius: 30,
         overflow: 'hidden',
@@ -70,14 +78,14 @@ const styles = StyleSheet.create({
     },
 
     cardColetaTextArea: {
-        flex: 2,
+        flex: 1,
         justifyContent: 'space-around',
         alignItems: 'center',
-        paddingVertical: 10,
+        padding: 10,
     },
 
     cardColetaIconsArea: {
-        flex: 1,
+        minHeight: 60,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
