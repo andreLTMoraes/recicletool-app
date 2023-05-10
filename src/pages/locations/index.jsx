@@ -15,13 +15,19 @@ export default function Locations() {
                     adressLabel="Rua Benfica, 455 - Madalena, Recife - PE"
                     addressMaps="Escola Politécnica de Pernambuco - Rua Benfica - Madalena, Recife - PE"
                     addressWaze="Escola Politécnica de Pernambuco, R. Benfica, 455 - Madalena, Recife - PE, 50720-001, Brasil"
+                    coordinatesUber={{latitude: -8.059480, longitude: -34.903420}}
                 />
             </View>
         </ScrollView>
     );
 }
 
-const CardColeta = ({ addressTitle, adressLabel, addressMaps, addressWaze }) => {
+const CardColeta = ({ addressTitle, adressLabel, addressMaps, addressWaze, coordinatesUber }) => {
+
+    const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[latitude]=${coordinatesUber.latitude}&dropoff[longitude]=${coordinatesUber.longitude}`;
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressMaps)}`
+    const wazeUrl = `https://www.waze.com/ul?q=${encodeURIComponent(addressWaze)}&navigate=yes`
+
     return (
         <View style={styles.cardColeta}>
             <View style={styles.cardColetaTextArea}>
@@ -29,17 +35,13 @@ const CardColeta = ({ addressTitle, adressLabel, addressMaps, addressWaze }) => 
                 <Text style={[appStyles.text, { color: 'white', textAlign: 'left' }]}>{adressLabel}</Text>
             </View>
             <View style={styles.cardColetaIconsArea}>
-                <IconContainer label="Maps"
-                    onPress={() => Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressMaps)}`)}
-                >
+                <IconContainer label="Maps" onPress={() => Linking.openURL(mapsUrl)}>
                     <MaterialCommunityIcons name={'google-maps'} color={COLORS.primaryDark} size={30} />
                 </IconContainer>
-                <IconContainer label="Waze"
-                    onPress={() => Linking.openURL(`https://www.waze.com/ul?q=${encodeURIComponent(addressWaze)}&navigate=yes`)}
-                >
+                <IconContainer label="Waze" onPress={() => Linking.openURL(wazeUrl)}>
                     <FontAwesome5 name={'waze'} color={COLORS.primaryDark} size={30} />
                 </IconContainer>
-                <IconContainer label="Uber">
+                <IconContainer label="Uber" onPress={() => Linking.openURL(uberUrl)}>
                     <FontAwesome5 name={'uber'} color={COLORS.primaryDark} size={30} />
                 </IconContainer>
             </View>
