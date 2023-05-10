@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, Linking, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Pressable, Linking, ScrollView, Share } from "react-native";
 import * as Clipboard from 'expo-clipboard';
 import appStyles from "../../utils/AppStyles";
 import { COLORS } from "../../utils/AppStyles";
@@ -18,17 +18,23 @@ export default function Locations() {
                     addressMaps="Escola Politécnica de Pernambuco - Rua Benfica - Madalena, Recife - PE"
                     addressWaze="Escola Politécnica de Pernambuco, R. Benfica, 455 - Madalena, Recife - PE, 50720-001, Brasil"
                     coordinatesUber={{latitude: -8.059480, longitude: -34.903420}}
+                    shortLink="https://bit.ly/recicletool"
                 />
             </View>
         </ScrollView>
     );
 }
 
-const CardColeta = ({ addressTitle, addressLabel, addressMaps, addressWaze, coordinatesUber }) => {
+const CardColeta = ({ addressTitle, addressLabel, addressMaps, addressWaze, coordinatesUber, shortLink }) => {
 
     const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[latitude]=${coordinatesUber.latitude}&dropoff[longitude]=${coordinatesUber.longitude}`;
     const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressMaps)}`
     const wazeUrl = `https://www.waze.com/ul?q=${encodeURIComponent(addressWaze)}&navigate=yes`
+
+    const shareConfig = {
+        title: `Recicletool - Máquina de reciclagem - ${addressTitle}`,
+        message: `Vem reciclar com a gente!\n\nNós aceitamos garrafas pet de 2L, e o nossa localização é a seguinte:\n\n${addressLabel}\n\n${shortLink}`
+    }
 
     return (
         <View style={styles.cardColeta}>
@@ -51,7 +57,7 @@ const CardColeta = ({ addressTitle, addressLabel, addressMaps, addressWaze, coor
                 <IconContainer label="Uber" onPress={() => Linking.openURL(uberUrl)}>
                     <FontAwesome5 name={'uber'} color={COLORS.primaryDark} size={30} />
                 </IconContainer>
-                <IconContainer label = "Compartilhar" onPress={() => Clipboard.setStringAsync('hey brotheer')}>
+                <IconContainer label = "Compartilhar" onPress={() => Share.share(shareConfig)}>
                     <Feather name={'share'} color={COLORS.primaryDark} size={30} />
                 </IconContainer>
             </View>
