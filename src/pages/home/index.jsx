@@ -33,7 +33,9 @@ export default function Home({ navigation }) {
             </Text>
           </View>
           <View style={[appStyles.container, styles.containerMiddle]}>
-            <Pressable style={appStyles.container} android_ripple={{ color: COLORS.primaryLight }}>
+            <Pressable style={appStyles.container} android_ripple={{ color: COLORS.primaryLight }}
+              onPress={() => navigation.navigate('locations')}
+            >
               <View style={[appStyles.container, styles.containerMiddleBar]} >
                 <Ionicons name='location-outline' size={22} color={COLORS.primaryDark} />
                 <Text style={[appStyles.text, styles.containerMiddleFont]}>Continue{"\n"}reciclando</Text>
