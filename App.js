@@ -10,6 +10,8 @@ import { useFonts } from 'expo-font';
 
 import InArea from './src/routes/inArea';
 
+import Notifications from "./src/contexts/Notifications"
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     'OpenSans': require('./assets/fonts/OpenSans-Medium.ttf'),
@@ -24,7 +26,9 @@ export default function App() {
     <NavigationContainer>
       <AlertProvider>
         <AuthProvider>
-          <InArea/>
+          <Notifications>
+            <InArea/>
+          </Notifications>
         </AuthProvider>
       </AlertProvider>
     </NavigationContainer>
