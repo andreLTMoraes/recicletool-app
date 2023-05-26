@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, Pressable, Switch } from 'react-native';
 import { COLORS } from '../../utils/AppStyles'
 import Feather from 'react-native-vector-icons/Feather';
 import appStyles from '../../utils/AppStyles';
+import { NotificationContext } from '../../contexts/Notifications';
 
 export default function Perfil({ navigation }) {
   return (
@@ -59,7 +60,9 @@ const ProfileField = ({ children, label }) => {
 const ToggleNotifications = () => {
   
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const { notificationsActive, setNotificationsActive } = useContext(NotificationContext);
+
+  const toggleSwitch = () => setNotificationsActive(previousState => !previousState);
   
   return (
     <Switch
@@ -67,7 +70,7 @@ const ToggleNotifications = () => {
         thumbColor={isEnabled ? COLORS.primaryLight : '#f4f3f4'}
         ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}
-        value={isEnabled}
+        value={notificationsActive}
         style = {{marginVertical: -10}}
     />
   );
