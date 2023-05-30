@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "664724322341",
+    "project_id": "recicletool-notifications",
+    "storage_bucket": "recicletool-notifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664724322341:android:df8336010422321acd67cc",
+        "android_client_info": {
+          "package_name": "com.recicletool.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr5yMi6QQRpmSv76Slm1qSVvXKEqNU9Cg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

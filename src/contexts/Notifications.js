@@ -74,7 +74,8 @@ export default function App({ children }) {
         <NotificationContext.Provider
             value={{
                 notificationsActive,
-                setNotificationsActive
+                setNotificationsActive,
+                expoPushToken
             }}
         >
             {children}

@@ -60,12 +60,13 @@ const ProfileField = ({ children, label }) => {
 const ToggleNotifications = () => {
   
   const [isEnabled, setIsEnabled] = useState(false);
-  const { notificationsActive, setNotificationsActive } = useContext(NotificationContext);
+  const { notificationsActive, setNotificationsActive, expoPushToken } = useContext(NotificationContext);
 
   const toggleSwitch = () => setNotificationsActive(previousState => !previousState);
   
   return (
-    <Switch
+    <View>
+      <Switch
         trackColor={{false: '#767577', true: COLORS.primaryDark}}
         thumbColor={isEnabled ? COLORS.primaryLight : '#f4f3f4'}
         ios_backgroundColor="#3e3e3e"
@@ -73,6 +74,8 @@ const ToggleNotifications = () => {
         value={notificationsActive}
         style = {{marginVertical: -10}}
     />
+    <Text>{expoPushToken}</Text>
+    </View>
   );
 }
 
