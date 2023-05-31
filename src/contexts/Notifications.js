@@ -13,6 +13,13 @@ export default function App({ children }) {
 
     const [notificationsActive, setNotificationsActive] = useState(true);
 
+    const changeNotificationsActive = (newState) => {
+        setNotificationsActive(newState);
+        if (!newState) {
+            Notifications.cancelAllScheduledNotificationsAsync().then(() => console.log("Notifications dismissed"))
+        }
+    }
+
     Notifications.setNotificationHandler({
         handleNotification: async () => ({
             shouldShowAlert: notificationsActive,
@@ -52,6 +59,19 @@ export default function App({ children }) {
         return token;
     }
 
+    const triggerNotifications = async () => {
+        await Notifications.scheduleNotificationAsync({
+            content: {
+                title: "Vamos reciclar hoje? ♻️",
+                body: "Venha reciclar e ganhe cupons!",
+                data: { data: "goes here" },
+            },
+            trigger: {
+                seconds: 10,
+                repeats: true,
+            },
+        });
+    }
 
     useEffect(() => {
         registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
@@ -70,12 +90,28 @@ export default function App({ children }) {
         };
     }, []);
 
+    useEffect(() => {
+        Notifications.getAllScheduledNotificationsAsync()
+            .then((scheduledNotifications) => {
+                if (scheduledNotifications.length > 0) {
+                    console.log("Esse dispostivo já estava recebendo notificações");
+                } else {
+                    console.log("Ativando recebimento de notificações...");
+                    triggerNotifications()
+                }
+            })
+            .catch((error) => {
+                console.log('Error checking scheduled notifications:', error);
+            });
+    }, [])
+
     return (
         <NotificationContext.Provider
             value={{
                 notificationsActive,
-                setNotificationsActive,
-                expoPushToken
+                changeNotificationsActive,
+                expoPushToken,
+                triggerNotifications
             }}
         >
             {children}

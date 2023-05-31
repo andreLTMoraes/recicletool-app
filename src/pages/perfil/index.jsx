@@ -1,10 +1,11 @@
 import React, {useState, useContext} from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, Pressable, Switch } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Pressable, Switch, Button } from 'react-native';
 import { COLORS } from '../../utils/AppStyles'
 import Feather from 'react-native-vector-icons/Feather';
 import appStyles from '../../utils/AppStyles';
 import { NotificationContext } from '../../contexts/Notifications';
+import * as Notifications from 'expo-notifications';
 
 export default function Perfil({ navigation }) {
   return (
@@ -60,10 +61,10 @@ const ProfileField = ({ children, label }) => {
 const ToggleNotifications = () => {
   
   const [isEnabled, setIsEnabled] = useState(false);
-  const { notificationsActive, setNotificationsActive, expoPushToken } = useContext(NotificationContext);
+  const { notificationsActive, changeNotificationsActive, expoPushToken, triggerNotifications } = useContext(NotificationContext);
 
-  const toggleSwitch = () => setNotificationsActive(previousState => !previousState);
-  
+  const toggleSwitch = (newState) => changeNotificationsActive(newState)
+
   return (
     <View>
       <Switch
@@ -75,6 +76,7 @@ const ToggleNotifications = () => {
         style = {{marginVertical: -10}}
     />
     <Text>{expoPushToken}</Text>
+    <Button onPress={triggerNotifications} title="Trigger Local Notifications" color="#841584" accessibilityLabel="Trigger Local Notifications"/>
     </View>
   );
 }
