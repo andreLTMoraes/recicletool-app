@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, createContext } from 'react';
 import { Platform } from 'react-native';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import { getNotificationsValue, toggleNotifications } from '../utils/asyncStorage';
 
 export const NotificationContext = createContext({})
 
@@ -13,10 +14,23 @@ export default function App({ children }) {
 
     const [notificationsActive, setNotificationsActive] = useState(true);
 
-    const changeNotificationsActive = (newState) => {
+    useEffect(() => {
+        getNotificationsValue().then(
+            (notificationValue) => {
+                console.log("Initial notification value ", notificationValue);
+                setNotificationsActive(notificationValue);
+            })
+    }, []);
+
+    const changeNotificationsActive = async () => {
+        const newState = await toggleNotifications();
         setNotificationsActive(newState);
         if (!newState) {
-            Notifications.cancelAllScheduledNotificationsAsync().then(() => console.log("Notifications dismissed"))
+            Notifications.cancelAllScheduledNotificationsAsync()
+                .then(() => console.log("Notifications dismissed"));
+        }else{
+            triggerNotifications()
+                .then(() => console.log("Notifications activated"));
         }
     }
 
@@ -64,10 +78,9 @@ export default function App({ children }) {
             content: {
                 title: "Vamos reciclar hoje? ♻️",
                 body: "Venha reciclar e ganhe cupons!",
-                data: { data: "goes here" },
             },
             trigger: {
-                seconds: 10,
+                seconds: 60*60*12,
                 repeats: true,
             },
         });
@@ -91,13 +104,12 @@ export default function App({ children }) {
     }, []);
 
     useEffect(() => {
-        Notifications.getAllScheduledNotificationsAsync()
-            .then((scheduledNotifications) => {
-                if (scheduledNotifications.length > 0) {
-                    console.log("Esse dispostivo já estava recebendo notificações");
+        getNotificationsValue()
+            .then((notificationsValue) => {
+                if (notificationsValue) {
+                    console.log("Notificações ativas");
                 } else {
-                    console.log("Ativando recebimento de notificações...");
-                    triggerNotifications()
+                    console.log("Notificações inativas");'          '
                 }
             })
             .catch((error) => {

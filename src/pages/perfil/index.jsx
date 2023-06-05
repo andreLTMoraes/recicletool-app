@@ -63,10 +63,9 @@ const ToggleNotifications = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const { notificationsActive, changeNotificationsActive, expoPushToken, triggerNotifications } = useContext(NotificationContext);
 
-  const toggleSwitch = (newState) => changeNotificationsActive(newState)
+  const toggleSwitch = (newState) => changeNotificationsActive()
 
   return (
-    <View>
       <Switch
         trackColor={{false: '#767577', true: COLORS.primaryDark}}
         thumbColor={isEnabled ? COLORS.primaryLight : '#f4f3f4'}
@@ -75,9 +74,6 @@ const ToggleNotifications = () => {
         value={notificationsActive}
         style = {{marginVertical: -10}}
     />
-    <Text>{expoPushToken}</Text>
-    <Button onPress={triggerNotifications} title="Trigger Local Notifications" color="#841584" accessibilityLabel="Trigger Local Notifications"/>
-    </View>
   );
 }
 
