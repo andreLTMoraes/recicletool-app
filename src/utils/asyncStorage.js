@@ -17,25 +17,11 @@ const getString = async (storageKey) => {
     }
 }
 
-const toggleNotifications = async () => {
-    try {
-        const currentValue = await getNotificationsValue();
-        const newValue = ! currentValue;
-        await storeString('@notifications', newValue.toString());
-        console.log('Notifications toggled:', newValue);
-        return newValue;
-    } catch (e) {
-        console.log('Error toggling notifications:', e);
-    }
-};
-
 const getNotificationsValue = async () => {
     try {
         let value = await getString('@notifications');
-        if(value == null) {
-            await toggleNotifications();
-            value = await getString('@notifications');
-        }
+        if(value == null) 
+            return null;
         return value === 'true';
     } catch (e) {
         console.log('Error getting notifications value:', e);
@@ -43,4 +29,23 @@ const getNotificationsValue = async () => {
     }
 };
 
-export {toggleNotifications, getNotificationsValue}
+const setNotificationsAsyncStorage = async (value) => {
+    try {
+        await storeString("@notifications", value? "true": "false");
+    } catch (error) {
+        console.log("Error setting notifications in asyncStorage", error)
+    }
+}
+
+const deleteStoredValue = async (key) => {
+    try {
+      await AsyncStorage.removeItem(key);
+      console.log('Value deleted successfully');
+    } catch (error) {
+      console.log('Error deleting value:', error);
+    }
+  };
+
+const removeNotificationsState = async () => deleteStoredValue('@notifications');
+
+export {getNotificationsValue, removeNotificationsState, setNotificationsAsyncStorage}

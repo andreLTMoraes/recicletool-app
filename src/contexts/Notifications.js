@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, createContext } from 'react';
 import { Platform } from 'react-native';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
-import { getNotificationsValue, toggleNotifications } from '../utils/asyncStorage';
+import { getNotificationsValue, toggleNotifications, setNotificationsAsyncStorage } from '../utils/asyncStorage';
 
 export const NotificationContext = createContext({})
 
@@ -15,23 +15,42 @@ export default function App({ children }) {
     const [notificationsActive, setNotificationsActive] = useState(true);
 
     useEffect(() => {
-        getNotificationsValue().then(
-            (notificationValue) => {
-                console.log("Initial notification value ", notificationValue);
-                setNotificationsActive(notificationValue);
-            })
+        initNotifications()
     }, []);
 
     const changeNotificationsActive = async () => {
-        const newState = await toggleNotifications();
-        setNotificationsActive(newState);
-        if (!newState) {
-            Notifications.cancelAllScheduledNotificationsAsync()
-                .then(() => console.log("Notifications dismissed"));
+        if(notificationsActive){
+            deactivateNotifications()
         }else{
-            triggerNotifications()
-                .then(() => console.log("Notifications activated"));
+            activateNotifications()
         }
+    }
+
+    const initNotifications = async () => {
+        getNotificationsValue()
+            .then(notificationValue => {
+                if(notificationValue == null){
+                    console.log("Inicializando sistema de notificações...");
+                    activateNotifications();
+                }else{
+                    console.log("Enviando notificações: " + notificationValue)
+                    setNotificationsActive(notificationValue);
+                }
+            })
+    }
+
+    const activateNotifications = async () => {
+        setNotificationsActive(true);
+        await setNotificationsAsyncStorage(true);
+        await triggerNotifications();
+        console.log("Notifications activated");
+    }
+
+    const deactivateNotifications = async () => {
+        setNotificationsActive(false);
+        await setNotificationsAsyncStorage(false);
+        await Notifications.cancelAllScheduledNotificationsAsync()
+        console.log("Notificações desativadas");
     }
 
     Notifications.setNotificationHandler({
@@ -73,19 +92,6 @@ export default function App({ children }) {
         return token;
     }
 
-    const triggerNotifications = async () => {
-        await Notifications.scheduleNotificationAsync({
-            content: {
-                title: "Vamos reciclar hoje? ♻️",
-                body: "Venha reciclar e ganhe cupons!",
-            },
-            trigger: {
-                seconds: 60*60*12,
-                repeats: true,
-            },
-        });
-    }
-
     useEffect(() => {
         registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
@@ -103,19 +109,18 @@ export default function App({ children }) {
         };
     }, []);
 
-    useEffect(() => {
-        getNotificationsValue()
-            .then((notificationsValue) => {
-                if (notificationsValue) {
-                    console.log("Notificações ativas");
-                } else {
-                    console.log("Notificações inativas");'          '
-                }
-            })
-            .catch((error) => {
-                console.log('Error checking scheduled notifications:', error);
-            });
-    }, [])
+    const triggerNotifications = async () => {
+        await Notifications.scheduleNotificationAsync({
+            content: {
+                title: "Vamos reciclar hoje? ♻️",
+                body: "Venha reciclar e ganhe cupons!",
+            },
+            trigger: {
+                seconds: 60*60*12,
+                repeats: true,
+            },
+        });
+    }
 
     return (
         <NotificationContext.Provider
