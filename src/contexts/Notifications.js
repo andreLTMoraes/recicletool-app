@@ -19,9 +19,9 @@ export default function App({ children }) {
     }, []);
 
     const changeNotificationsActive = async () => {
-        if(notificationsActive){
+        if (notificationsActive) {
             deactivateNotifications()
-        }else{
+        } else {
             activateNotifications()
         }
     }
@@ -29,10 +29,10 @@ export default function App({ children }) {
     const initNotifications = async () => {
         getNotificationsValue()
             .then(notificationValue => {
-                if(notificationValue == null){
+                if (notificationValue == null) {
                     console.log("Inicializando sistema de notificações...");
                     activateNotifications();
-                }else{
+                } else {
                     console.log("Enviando notificações: " + notificationValue)
                     setNotificationsActive(notificationValue);
                 }
@@ -42,7 +42,7 @@ export default function App({ children }) {
     const activateNotifications = async () => {
         setNotificationsActive(true);
         await setNotificationsAsyncStorage(true);
-        await triggerNotifications();
+        await triggerPromotionNotification();
         console.log("Notifications activated");
     }
 
@@ -109,18 +109,32 @@ export default function App({ children }) {
         };
     }, []);
 
-    const triggerNotifications = async () => {
+    const triggerNotifications = async (title, body, seconds, repeat=false) => {
         await Notifications.scheduleNotificationAsync({
             content: {
-                title: "Vamos reciclar hoje? ♻️",
-                body: "Venha reciclar e ganhe cupons!",
+                title: title,
+                body: body,
             },
             trigger: {
-                seconds: 60*60*12,
-                repeats: true,
+                seconds: seconds,
+                repeats: repeat,
             },
         });
     }
+
+    const triggerPromotionNotification = async () =>
+        await triggerNotifications(
+            "Vamos reciclar hoje? ♻️",
+            "Venha reciclar e ganhe cupons!",
+            60*60*12, true
+        );
+
+    const triggerCouponNotification = async () =>
+        await triggerNotifications(
+            "Você já usou o seu cupom? 📋♻️",
+            "Resgate suas recompensas e proteja o meio ambiente",
+            60*60*24*2, false
+        );
 
     return (
         <NotificationContext.Provider
@@ -128,7 +142,7 @@ export default function App({ children }) {
                 notificationsActive,
                 changeNotificationsActive,
                 expoPushToken,
-                triggerNotifications
+                triggerCouponNotification,
             }}
         >
             {children}

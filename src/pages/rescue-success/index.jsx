@@ -1,7 +1,8 @@
 import { View, Image, Text, StyleSheet, ScrollView, Pressable } from "react-native";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { COLORS } from '../../utils/AppStyles'
 import appStyles from "../../utils/AppStyles";
+import { NotificationContext } from '../../contexts/Notifications';
 
 export default function RescueResult({ navigation }) {
 
@@ -18,6 +19,13 @@ export default function RescueResult({ navigation }) {
 }
 
 function RescueSuccess({ navigation }) {
+    
+    const { triggerCouponNotification } = useContext(NotificationContext);
+    
+    useEffect(() => {
+        triggerCouponNotification();
+    }, []);
+
     return (
         <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
             <View style={[appStyles.mainContainer, {backgroundColor: COLORS.primaryLight}]}>

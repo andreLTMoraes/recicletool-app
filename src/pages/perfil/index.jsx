@@ -61,7 +61,7 @@ const ProfileField = ({ children, label }) => {
 const ToggleNotifications = () => {
   
   const [isEnabled, setIsEnabled] = useState(false);
-  const { notificationsActive, changeNotificationsActive, expoPushToken, triggerNotifications } = useContext(NotificationContext);
+  const { notificationsActive, changeNotificationsActive } = useContext(NotificationContext);
 
   const toggleSwitch = (newState) => changeNotificationsActive()
 
