@@ -110,7 +110,7 @@ export default function App({ children }) {
     }, []);
 
     const triggerNotifications = async (title, body, seconds, repeat=false) => {
-        await Notifications.scheduleNotificationAsync({
+        return await Notifications.scheduleNotificationAsync({
             content: {
                 title: title,
                 body: body,
@@ -129,13 +129,14 @@ export default function App({ children }) {
             60*60*12, true
         );
 
-    const triggerCouponNotification = async () =>
-        await triggerNotifications(
+    const triggerCouponNotification = async () => {
+        return await triggerNotifications(
             "Você já usou o seu cupom? 📋♻️",
             "Resgate suas recompensas e proteja o meio ambiente",
-            60*60*24*2, false
+            5, false
         );
-
+    }
+        
     return (
         <NotificationContext.Provider
             value={{

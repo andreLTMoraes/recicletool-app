@@ -1,30 +1,54 @@
 import { View, Image, Text, StyleSheet, ScrollView, Pressable } from "react-native";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useCallback } from "react";
 import { COLORS } from '../../utils/AppStyles'
 import appStyles from "../../utils/AppStyles";
 import { NotificationContext } from '../../contexts/Notifications';
+import { addToArray, filterArray, clearContent } from "../../utils/asyncStorage";
+import * as Notifications from 'expo-notifications';
+import { useFocusEffect } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 
-export default function RescueResult({ navigation }) {
+export default function RescueResult({ navigation, route }) {
 
     const [success, setSuccess] = useState(true);
+    const {id} = route.params;
 
     return (
         <View style={{flex: 1}}>
             {
                 success ?
-                    <RescueSuccess navigation={navigation} /> : <RescueError navigation={navigation} />
+                    <RescueSuccess navigation={navigation} id = {id}/> : <RescueError navigation={navigation} />
             }
         </View>
     );
 }
 
-function RescueSuccess({ navigation }) {
+function RescueSuccess({ navigation, id }) {
     
     const { triggerCouponNotification } = useContext(NotificationContext);
+    const isFocused = useIsFocused();
     
     useEffect(() => {
-        triggerCouponNotification();
-    }, []);
+        if(isFocused)
+            if(id) handleNotifications();
+    }, [isFocused]);
+
+    const handleNotifications = async () => {
+        console.log("COUPON ID: " + id);
+        const filteredArray = await filterArray("@coupon_notifications", (obj) => obj.id == id);
+        console.log("filtered array: " + filteredArray)
+        if(filteredArray.length == 0){
+            //agendar notificação
+            console.log("Agendando notificação...");
+            const notification_id = await triggerCouponNotification();
+            await addToArray("@coupon_notifications", {id: id, notification_id: notification_id});
+        } else {
+            //desagendar notificação
+            console.log("Desagendando notificação...");
+            await clearContent("@coupon_notifications");
+            await Notifications.cancelScheduledNotificationAsync(filteredArray[0].notification_id);
+        }
+    }
 
     return (
         <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>

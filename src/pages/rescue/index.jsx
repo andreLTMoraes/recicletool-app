@@ -17,7 +17,7 @@ export default function Rescue({navigation}) {
                             <Image source={require("../../../assets/shop-icon.png")}
                                 style={styles.buttonIcon} resizeMode="contain" />
                         </View>
-                        <Pressable style={styles.buttonChip} onPress={() => navigation.navigate('rescue-success')} android_ripple={{ color: 'white' }}> 
+                        <Pressable style={styles.buttonChip} onPress={() => navigation.navigate('rescue-success', {id: 'abcdefg'})} android_ripple={{ color: 'white' }}> 
                             <Text style={[appStyles.text, styles.textButton]}>GERAR CUPOM</Text>
                         </Pressable>
                     </View>
