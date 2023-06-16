@@ -3,7 +3,7 @@ import { useState, useContext, useEffect, useCallback } from "react";
 import { COLORS } from '../../utils/AppStyles'
 import appStyles from "../../utils/AppStyles";
 import { NotificationContext } from '../../contexts/Notifications';
-import { addToArray, filterArray, clearContent } from "../../utils/asyncStorage";
+import { addToArray, filterArray, storeString } from "../../utils/asyncStorage";
 import * as Notifications from 'expo-notifications';
 import { useFocusEffect } from "@react-navigation/native";
 import { useIsFocused } from "@react-navigation/native";
@@ -36,7 +36,7 @@ function RescueSuccess({ navigation, id }) {
     const handleNotifications = async () => {
         console.log("COUPON ID: " + id);
         const filteredArray = await filterArray("@coupon_notifications", (obj) => obj.id == id);
-        console.log("filtered array: " + filteredArray)
+        //console.log("filtered array: " + JSON.stringify(filteredArray))
         if(filteredArray.length == 0){
             //agendar notificação
             console.log("Agendando notificação...");
@@ -45,7 +45,9 @@ function RescueSuccess({ navigation, id }) {
         } else {
             //desagendar notificação
             console.log("Desagendando notificação...");
-            await clearContent("@coupon_notifications");
+            const newFilteredArray = await filterArray('@coupon_notifications', (obj) => obj.id != id);
+            //console.log("new filtered array: " + JSON.stringify(newFilteredArray))
+            await storeString("@coupon_notifications", JSON.stringify(newFilteredArray));
             await Notifications.cancelScheduledNotificationAsync(filteredArray[0].notification_id);
         }
     }

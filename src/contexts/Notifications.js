@@ -133,7 +133,7 @@ export default function App({ children }) {
         return await triggerNotifications(
             "Você já usou o seu cupom? 📋♻️",
             "Resgate suas recompensas e proteja o meio ambiente",
-            5, false
+            60*60*12, false
         );
     }
         

@@ -92,4 +92,4 @@ const deleteStoredValue = async (key) => {
 const removeNotificationsState = async () => deleteStoredValue('@notifications');
 
 export {getNotificationsValue, removeNotificationsState, setNotificationsAsyncStorage,
-        addToArray, filterArray, clearContent}
+        addToArray, filterArray, clearContent, storeString}
