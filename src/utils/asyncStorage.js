@@ -19,6 +19,27 @@ const getString = async (storageKey) => {
     }
 }
 
+const storeObject = async (key, value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, jsonValue);
+    console.log('Object stored successfully!');
+  } catch (error) {
+    console.error('Error storing object:', error);
+  }
+};
+
+
+const getObject = async (key) => {
+  try {
+    const jsonValue = await AsyncStorage.getItem(key);
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (error) {
+    console.error('Error retrieving object:', error);
+    return null;
+  }
+};
+
   const addToArray = async (key, newItem) => {
     try {
       const serializedArray = await AsyncStorage.getItem(key);
@@ -92,4 +113,4 @@ const deleteStoredValue = async (key) => {
 const removeNotificationsState = async () => deleteStoredValue('@notifications');
 
 export {getNotificationsValue, removeNotificationsState, setNotificationsAsyncStorage,
-        addToArray, filterArray, clearContent, storeString}
+        addToArray, filterArray, clearContent, storeString, storeObject, getObject}

@@ -5,9 +5,13 @@ import { COLORS } from '../../utils/AppStyles'
 import Feather from 'react-native-vector-icons/Feather';
 import appStyles from '../../utils/AppStyles';
 import { NotificationContext } from '../../contexts/Notifications';
+import { AuthContext } from '../../contexts/Authentication';
 import * as Notifications from 'expo-notifications';
 
 export default function Perfil({ navigation }) {
+  
+  const {logOut} = useContext(AuthContext);
+  
   return (
     <ScrollView style={{ flex: 1, width: '100%' }} contentContainerStyle={{ flexGrow: 1 }}>
       <View style={[appStyles.mainContainer, { backgroundColor: COLORS.primaryDark }]}>
@@ -30,6 +34,17 @@ export default function Perfil({ navigation }) {
           </ProfileField>
           <ProfileField label='Notificações'>
             <ToggleNotifications/>
+          </ProfileField>
+          <ProfileField label='Sair da conta'>
+            <View style={{ overflow: 'hidden', borderRadius: 100, marginVertical: -10 }}>
+              <Pressable 
+                onPress={() => logOut()} 
+                android_ripple={{ color: COLORS.primaryDark }}
+                style = {{padding: 5}}
+              >
+                <Feather name={'chevron-right'} size={30} color={COLORS.primaryDark} />
+              </Pressable>
+            </View>
           </ProfileField>
           <ProfileField label='Deletar conta'>
             <View style={{ overflow: 'hidden', borderRadius: 100, marginVertical: -10 }}>

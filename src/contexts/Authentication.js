@@ -1,13 +1,55 @@
-import React, { createContext, useState, useContext } from 'react'
+import React, { createContext, useState, useContext, useEffect } from 'react'
 import { AlertContext } from './Alerts'
 import { login, register } from '../utils/API'
 import { checkObjValuesEmpty, validEmail, validPhone, validSsn } from '../utils/validations'
+import { storeObject, getObject, clearContent } from '../utils/asyncStorage'
 
-export const AuthContext = createContext({})
+export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
     const { showLoading, hideLoading, openModal } = useContext(AlertContext)
     const [authToken, setAuthToken] = useState(null)
+
+    const loginKey = "@login_credentials"
+
+    useEffect(() => {
+        autoLogin()
+    }, []);
+
+
+    const storeLoginCredentials = async (username, password) => {
+        await storeObject(loginKey, { "username": username, "password": password });
+    }
+    
+    const getStoredLoginCredentials = async () => await getObject(loginKey);
+
+    const logOut = async () => {
+        showLoading();
+        await clearContent(loginKey);
+        setAuthToken(null);
+        hideLoading();
+    }
+
+    async function autoLogin() {
+        showLoading();
+        try {
+            const storedCredentials = await getStoredLoginCredentials();
+            console.log("stored credentials", JSON.stringify(storedCredentials))
+            if (storedCredentials) {
+                const res = await login(storedCredentials.username, storedCredentials.password);
+                if (res?.statusCode == '200') {
+                    console.log("Login automatico OK")
+                    setAuthToken(res.authToken);
+                } else {
+                    console.log("Login automatico falhou")
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        hideLoading();
+    }
+
 
     async function loginEmail(data) {
         var pass = true
@@ -25,6 +67,7 @@ function AuthProvider({ children }) {
                     console.log("Login successfull")
                     if (data?.save) {
                         // LocalStorage
+                        await storeLoginCredentials(data.useremail, data.password);
                     }
                     setAuthToken(res.authToken);
                 } else {
@@ -86,7 +129,8 @@ function AuthProvider({ children }) {
             value={{
                 authToken,
                 loginEmail,
-                registerUser
+                registerUser,
+                logOut
             }}
         >
             {children}
