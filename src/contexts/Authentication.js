@@ -5,28 +5,35 @@ import { checkObjValuesEmpty, validEmail, validPhone, validSsn } from '../utils/
 
 export const AuthContext = createContext({})
 
-function AuthProvider({children}) {
+function AuthProvider({ children }) {
     const { showLoading, hideLoading, openModal } = useContext(AlertContext)
-    const [user, setUser] = useState(null)
+    const [authToken, setAuthToken] = useState(null)
 
     async function loginEmail(data) {
         var pass = true
-        if(checkObjValuesEmpty(data)){ 
+        if (checkObjValuesEmpty(data)) {
             openModal('Campo em branco', 'Preencha todos os campos para realizar o cadastro.')
             pass = false
         }
-        
 
-        if(pass) {
+        if (pass) {
             showLoading()
 
-            await login(data.useremail, data.password)
-            .then(res => {
-                if(data?.save) {
-                    // LocalStorage
+            try {
+                const res = await login(data.useremail, data.password);
+                if (res?.statusCode == '200') {
+                    console.log("Login successfull")
+                    if (data?.save) {
+                        // LocalStorage
+                    }
+                    setAuthToken(res.authToken);
+                } else {
+                    console.log("Login unsuccessfull")
+                    openModal('Email ou senha não cadastrados', 'Confira seu email ou senha')
                 }
-                setUser(res)
-            })
+            } catch (error) {
+                console.error(error);
+            }
 
             hideLoading()
         }
@@ -34,50 +41,50 @@ function AuthProvider({children}) {
 
     async function registerUser(data) {
         var pass = true
-        if(checkObjValuesEmpty(data)){ 
+        if (checkObjValuesEmpty(data)) {
             openModal('Campo em branco', 'Preencha todos os campos para realizar o cadastro.')
             pass = false
         }
 
-        if(!data?.term) {
+        if (!data?.term) {
             openModal('Termo de condições', 'Aceite os termos de condições.')
             pass = false
         }
 
-        if(!validEmail(data?.email)) {
+        if (!validEmail(data?.email)) {
             openModal('Email inválido', 'Verifique se email está correto.')
             pass = false
         }
 
-        if(!validPhone(data?.phone)) {
+        if (!validPhone(data?.phone)) {
             openModal('Celular inválido', 'Verifique se número está está no formato (99)99999-9999.')
             pass = false
         }
 
-        if(!validSsn(data?.ssn)) {
+        if (!validSsn(data?.ssn)) {
             openModal('CPF inválido', 'Verifique se número do CPF está correto.')
             pass = false
         }
 
-        if(pass) {
+        if (pass) {
             showLoading()
 
             await register(data)
-            .then(res => {
-                if(data?.save) {
-                    // LocalStorage
-                }
-                setUser(res)
-            })
+                .then(res => {
+                    if (data?.save) {
+                        // LocalStorage
+                    }
+                    setAuthToken(res)
+                })
 
             hideLoading()
         }
     }
 
-    return(
+    return (
         <AuthContext.Provider
             value={{
-                user,
+                authToken,
                 loginEmail,
                 registerUser
             }}
