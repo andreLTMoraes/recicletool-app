@@ -7,6 +7,8 @@ import Login from '../pages/login'
 import Register from '../pages/register'
 import Rules from '../pages/rules'
 
+import { COLORS } from '../utils/AppStyles'
+
 const Stack = createNativeStackNavigator()
 
 export default function OutArea() {

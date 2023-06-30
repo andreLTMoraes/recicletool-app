@@ -150,7 +150,7 @@ export default function Register() {
                 style={styles.saveCredential}
                 onPress={() => setData({...data, term: !data.term})}
               >
-              <Feather name={data.term ? 'check-square' : 'square'} size={24} color={COLORS.green}/>
+              <Feather name={data.term ? 'check-square' : 'square'} size={24} color={COLORS.primaryDark}/>
             </TouchableOpacity>
             <Text style={styles.generalLabel}>Aceito o </Text>
             <TouchableOpacity
@@ -193,7 +193,7 @@ export default function Register() {
       resizeMode: 'contain'
     },
     title: {
-      color: COLORS.green,
+      color: COLORS.primaryDark,
       fontSize: 40,
       fontWeight: '900',
       alignSelf: 'flex-start',
@@ -215,7 +215,7 @@ export default function Register() {
       fontSize: 16
     },
     forgotten: {
-      color: COLORS.green,
+      color: COLORS.primaryDark,
       fontSize: 16
     },
     footer: {
@@ -225,7 +225,7 @@ export default function Register() {
       marginBottom: 20
     },
     register: {
-      color: COLORS.green,
+      color: COLORS.primaryDark,
       fontWeight: '900',
       fontSize: 16
     }

@@ -29,7 +29,7 @@ export default function Modal({
                 justifyContent: 'space-between'
             }}>
                 <Text style={{
-                    color: COLORS.green,
+                    color: COLORS.primaryDark,
                     fontWeight: 'bold',
                     fontSize: 16,
                     marginTop: 18
@@ -49,7 +49,7 @@ export default function Modal({
                     onPress={() => okFunction()}
                 >
                     <Text style={{
-                        color: COLORS.green,
+                        color: COLORS.primaryDark,
                         fontWeight: 'bold',
                         fontSize: 16
                     }}>Ok</Text>
