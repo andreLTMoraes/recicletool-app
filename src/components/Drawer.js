@@ -12,7 +12,7 @@ export default function RecDrawer (props) {
     const navigation = useNavigation()
 
     return (
-        <DrawerContentScrollView {...props} style={{backgroundColor: COLORS.green}}>
+        <DrawerContentScrollView {...props} style={{backgroundColor: COLORS.primaryDark}}>
             <View style={styles.header}>
                 <Image style={styles.logo} source={logo}/>
                 <View style={styles.headerUserRow}>

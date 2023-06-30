@@ -25,7 +25,7 @@ export default function Loading() {
                 alignItems: 'center',
                 justifyContent: 'center'
             }}>
-                <ActivityIndicator color={COLORS.green} size='large' />
+                <ActivityIndicator color={COLORS.primaryDark} size='large' />
                 <Text style={{color: '#fff', marginTop: 20}}>Carregando...</Text>
             </View>
         </View>

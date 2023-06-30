@@ -46,7 +46,7 @@ export default function Choice() {
   const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLORS.green,
+        backgroundColor: COLORS.primaryDark,
         alignItems: 'center',
         justifyContent: 'center',
     },
